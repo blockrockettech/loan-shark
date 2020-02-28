@@ -1,0 +1,19 @@
+{
+  "name": "loan-shark",
+  "version": "1.0.0",
+  "description": "Loaning NFT - return or else the shark with eat you",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blockrockettech/loan-shark.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blockrockettech/loan-shark/issues"
+  },
+  "homepage": "https://github.com/blockrockettech/loan-shark#readme"
+}
