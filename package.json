@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/blockrockettech/loan-shark/issues"
   },
-  "homepage": "https://github.com/blockrockettech/loan-shark#readme"
+  "homepage": "https://github.com/blockrockettech/loan-shark#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0"
+  }
 }
