@@ -163,10 +163,18 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     }
 
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public {
+        Loan memory loan = tokensAvailableToLoan[tokenId];
+        require(!loan.isBorrowed, "Cannot transfer a borrowed contract");
+        require(!loan.isEscrowed, "Cannot transfer a escrowed contract");
+
         return tokenContract.safeTransferFrom(from, to, tokenId, _data);
     }
 
     function transferFrom(address from, address to, uint256 tokenId) public {
+        Loan memory loan = tokensAvailableToLoan[tokenId];
+        require(!loan.isBorrowed, "Cannot transfer a borrowed contract");
+        require(!loan.isEscrowed, "Cannot transfer a escrowed contract");
+
         return tokenContract.transferFrom(from, to, tokenId);
     }
 
