@@ -73,12 +73,25 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return true;
     }
 
-    function takeNft(uint256 _tokenId, uint256 _totalCommitment) public {
+    function borrowToken(uint256 _tokenId, uint256 _totalCommitment) public returns (bool) {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
+        Loan storage loan = tokensAvailableToLoan[_tokenId];
+        require(loan.isEscrowed, "Token not escrowed");
+        require(!loan.isBorrowed, "Token already borrowed");
+        require(loan.borrower == address(0), "Token already got a borrower");
+
+
         // sudo transfer this NFT to the new owner
+        loan.borrower = msg.sender;
+        loan.isBorrowed = true;
+
+        // TODO start the stream....?
+
         // enable proxy methods to display original
         // update state to show item is user
+
+        return true;
     }
 
     function returnNft(uint256 _tokenId) public {
@@ -120,8 +133,12 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return tokenContract.symbol();
     }
 
-    function tokenURI(uint256 tokenId) external view returns (string memory) {
-        return tokenContract.tokenURI(tokenId);
+    function tokenURI(uint256 _tokenId) external view returns (string memory) {
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        if (loan.isBorrowed) {
+            return tokenContract.tokenURI(_tokenId);
+        }
+        return "TODO return static IPFS hash";
     }
 
     ////////////////////////////////
@@ -130,13 +147,19 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     // TODO proxy through to escrowed NFT
     // TODO special case methods which need to be thought about
+    // TODO check expired stream as well for all proxy methods?
 
     function balanceOf(address owner) public view returns (uint256) {
+        // TODO how to handle this proxy method
         return tokenContract.balanceOf(owner);
     }
 
-    function ownerOf(uint256 tokenId) public view returns (address) {
-        return tokenContract.ownerOf(tokenId);
+    function ownerOf(uint256 _tokenId) public view returns (address) {
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        if (loan.isBorrowed) {
+            return tokenContract.ownerOf(_tokenId);
+        }
+        return address(this);
     }
 
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public {
