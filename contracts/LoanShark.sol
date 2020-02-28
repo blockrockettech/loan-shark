@@ -28,8 +28,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     // The original NFT contract
     IERC721Full public tokenContract;
 
-    // Total
     mapping(uint256 => Loan) public tokensAvailableToLoan;
+
+    // So we can enumerate them
+    mapping(uint256 => uint256) public indexToTokenId;
 
     constructor(
         IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
@@ -73,6 +75,29 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return true;
     }
 
+    /*
+     * Close any outstanding un-borrowed NFT loans
+     * Send the NFT back to the original lender
+     */
+    function cancelLoan(uint256 _tokenId) public returns (bool) {
+        require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
+
+        Loan storage loan = tokensAvailableToLoan[_tokenId];
+        require(loan.isEscrowed, "Token not escrowed");
+        require(!loan.isBorrowed, "Token already borrowed");
+        require(loan.borrower != address(0), "Token already got a borrower");
+
+        address originalLender = loan.lender;
+
+        delete tokensAvailableToLoan[_tokenId];
+
+        // Send the loan back to the original lender
+        tokenContract.safeTransferFrom(address(this), originalLender, _tokenId);
+        require(isTokenOwnedBy(_tokenId, originalLender), "Token not returned successfully");
+
+        return true;
+    }
+
     function borrowToken(uint256 _tokenId, uint256 _totalCommitment) public returns (bool) {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
@@ -81,24 +106,30 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         require(!loan.isBorrowed, "Token already borrowed");
         require(loan.borrower == address(0), "Token already got a borrower");
 
-
         // sudo transfer this NFT to the new owner
         loan.borrower = msg.sender;
         loan.isBorrowed = true;
 
-        // TODO start the stream....?
-
-        // enable proxy methods to display original
-        // update state to show item is user
+        // TODO start the stream .... ?
 
         return true;
     }
 
-    function returnNft(uint256 _tokenId) public {
+    function returnBorrowedNft(uint256 _tokenId) public returns (bool) {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
-        // NFT is taken back in true full control on this proxy
-        // NFT reset loan state
+        Loan storage loan = tokensAvailableToLoan[_tokenId];
+        require(loan.isEscrowed, "Token not escrowed");
+        require(loan.isBorrowed, "Token not borrowed");
+        require(loan.borrower == msg.sender, "Token not borrowed by caller");
+
+        // sudo transfer this NFT back to the escrow
+        loan.borrower = address(0);
+        loan.isBorrowed = false;
+
+        // TODO close stream .... ?
+
+        return true;
     }
 
     function pullBackOverdueNft(uint256 _tokenId) public {
@@ -110,13 +141,56 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // penalise the borrower in some form?
     }
 
+    /////////////////////
+    // Query utilities //
+    /////////////////////
+
+    function getLoanDetails(uint _tokenId) public view returns (
+        address lender,
+        uint256 tokenId,
+        address borrower,
+        bool isEscrowed,
+        bool isBorrowed,
+        uint256 costPerMinute,
+        uint256 maxMinutesAvailableForHire
+    ) {
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        return (
+            loan.lender,
+            loan.tokenId,
+            loan.borrower,
+            loan.isEscrowed,
+            loan.isBorrowed,
+            loan.costPerMinute,
+            loan.maxMinutesAvailableForHire
+        );
+    }
+
+    function getRemainingTimeLeftForLoan(uint _tokenId) public returns (uint256) {
+        // TODO
+        return 0;
+    }
+
+    function getRemainingStreamBalance(uint _tokenId) public returns (uint256) {
+        // TODO
+        return 0;
+    }
+
+    ////////////////////
+    // Internal utils //
+    ////////////////////
+
     // taking ownership of the NFT via callback confirmation
     function onERC721Received(address operator, address from, uint256 tokenId, bytes memory data) public returns (bytes4) {
         return this.onERC721Received.selector;
     }
 
     function isTokenEscrowed(uint256 _tokenId) public view returns (bool) {
-        return IERC721Full(tokenContract).ownerOf(_tokenId) == address(this);
+        return isTokenOwnedBy(_tokenId, address(this));
+    }
+
+    function isTokenOwnedBy(uint256 _tokenId, address _owner) public view returns (bool) {
+        return IERC721Full(tokenContract).ownerOf(_tokenId) == _owner;
     }
 
     ////////////////////////////////////////
