@@ -8,13 +8,18 @@ import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 contract LoanShark is ERC721Full, WhitelistedRole {
 
     struct Loan {
+        // Config
         address lender;
         uint256 tokenId;
-        uint256 costPerDay;
-        uint256 maxNumberOfDays;
-        bool isEscrowed;
-        address isBorrowed;
         address borrower;
+
+        // state flags
+        bool isEscrowed;
+        bool isBorrowed;
+
+        // payment terms
+        uint256 costPerMinute;
+        uint256 maxMinutesAvailableForHire;
     }
 
     // What to stream the payment in
@@ -35,25 +40,57 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         paymentToken = _paymentToken;
         tokenContract = _tokenContract;
     }
+
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
 
-    function placeItemFoSale(uint256 _tokenId, uint256 _costPerDay, uint256 _maxNumberOfDays) public returns (bool) {
+    function enableTokenForLending(uint256 _tokenId, uint256 _costPerMinute, uint256 _maxMinutesAvailableForHire) public returns (bool) {
+
+        // Validate input
+        require(_costPerMinute > 0, "Cannot loan the token for free");
+        require(_maxMinutesAvailableForHire > 0, "Cannot lend a token for less than 1 minute");
+        require(tokensAvailableToLoan[_tokenId].tokenId == 0, "Token already placed for sale");
+
+        // Validate caller owns it
+        require(tokenContract.ownerOf(_tokenId) == msg.sender, "Caller does not own the NFT");
+
+        // Setup Loan
+        tokensAvailableToLoan[_tokenId] = Loan({
+            tokenId : _tokenId,
+            lender : msg.sender,
+            borrower : address(this),
+
+            isEscrowed : true,
+            isBorrowed : false,
+
+            costPerMinute : _costPerMinute,
+            maxMinutesAvailableForHire : _maxMinutesAvailableForHire
+            });
+
+        // Escrow NFT into the Loan Shark Contract
+        tokenContract.safeTransferFrom(msg.sender, address(this), _tokenId);
+        require(isTokenEscrowed(_tokenId), "Token not correctly escrowed");
+
         return true;
     }
 
-
     function takeNft(uint256 _tokenId, uint256 _totalCommitment) public {
+        require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
+
         // sudo transfer this NFT to the new owner
         // enable proxy methods to display original
         // update state to show item is user
     }
 
     function returnNft(uint256 _tokenId) public {
+        require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
+
         // NFT is taken back in true full control on this proxy
         // NFT reset loan state
     }
 
     function pullBackOverdueNft(uint256 _tokenId) public {
+        require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
+
         // only allow after loan has expired
         // take back ownership from the borrower
         // reset loan state
@@ -62,8 +99,11 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     // taking ownership of the NFT via callback confirmation
     function onERC721Received(address operator, address from, uint256 tokenId, bytes memory data) public returns (bytes4) {
-        emit ItemReceived(operator, from, tokenId, data, gasleft());
         return this.onERC721Received.selector;
+    }
+
+    function isTokenEscrowed(uint256 _tokenId) public view returns (bool) {
+        return IERC721Full(tokenContract).ownerOf(_tokenId) == address(this);
     }
 
     ////////////////////////////////////////
