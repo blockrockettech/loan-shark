@@ -141,7 +141,7 @@ class MyNFTs extends Component {
     })
   }
 
-  buildNftCards = () => {
+  buildMyNftCards = () => {
     return this.state.myNfts.map(item => <NftCard key={item.tokenId} item={item} />)
   }
 
@@ -167,13 +167,13 @@ class MyNFTs extends Component {
           {this.state.showLendingToggle? (
             <div className={classes.subtitle}>
               <div>
-                {this.buildCardsForSale()}
+                {this.buildMyNftCards()}
               </div>
             </div>
             ) : (
             <div className={classes.subtitle}>
               <div>
-                {this.buildNftCards()}
+                {this.buildCardsForSale()}
               </div>
             </div>
           )}
