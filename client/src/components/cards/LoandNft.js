@@ -12,13 +12,78 @@ import Web3 from 'web3'
 
 const styles = {
   root: {
-    maxWidth: 345,
-    maxHeight: 500,
+    width: 300,
+    height: 500,
+    margin: 20,
+    fontFamily: 'Spartan',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderRadius: 6,
+    backgroundColor: '#FFFFFF',
+    boxShadow: '3px 3px 5px 6px #ccc',
   },
-  media: {
-    height: 140,
+  textGroup: {
+
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: 600,
+    marginBottom: 20,
+  },
+  cardText: {
+    maxHeight: 230,
+    fontSize: 12,
+    overflow: 'scroll',
+    lineHeight: 1.25,
+  },
+  borrowButton: {
+    backgroundColor: '#5e6fe6',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 100,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#bca049',
+      color: '#000080'
+    }
+  },
+  clawbackButton: {
+    backgroundColor: '#b52114',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 100,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#69120b',
+    }
+  },
+  imageContainer: {
+    minHeight: 100,
+    maxHeight: 469,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    maxWidth: 250,
+    maxHeight: 320,
+    marginTop: 10,
   },
 }
+
 
 const date = (d) => `${new Date(d * 1000).toDateString()} ${new Date(d * 1000).toLocaleTimeString()}`
 
@@ -35,40 +100,29 @@ const LoandNft = props =>  {
 
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={item.image}
-          title={item.name}
-        />
+    <div className={classes.root}>
+      <div className={classes.imageContainer}>
+        <img src={item.image} className={classes.image} />
+      </div>
+      <div className={classes.textGroup}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <div className={classes.cardTitle}>
             {item.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {item.price}
-            {item.duration}
-            {/*{item.description}*/}
-          </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
-                From: {date(item.start)} <br/>
-                To: {date(item.end)}
-                <br/>
-                <br/>
-                Total charged: {toDai(item.balance)}
-                <br />
-                <br />
-                Lender: {shortAddress(item.lender)} <br />
-                Borrower: {shortAddress(item.borrower)}
-            </Typography>
+          </div>
+          <div className={classes.cardText}>
+            From: {date(item.start)} <br/>
+            To: {date(item.end)}
+            <br/>
+            <br/>
+            Total charged: {toDai(item.balance)}
+            <br />
+            <br />
+            Lender: {shortAddress(item.lender)} <br />
+            Borrower: {shortAddress(item.borrower)}
+          </div>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-
-
-      </CardActions>
-    </Card>
+      </div>
+    </div>
   )
 }
 
