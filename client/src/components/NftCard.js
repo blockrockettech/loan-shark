@@ -19,7 +19,7 @@ const styles = {
   },
 }
 
-const MediaCard = props =>  {
+const NftCard = props =>  {
   const { classes, item = {} } = props
 
   return (
@@ -35,22 +35,12 @@ const MediaCard = props =>  {
             {item.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {item.price}
-            {item.duration}
             {item.description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Borrow
-        </Button>
-        <Button size="small" color="primary">
-          Clawback
-        </Button>
-      </CardActions>
     </Card>
   )
 }
 
-export default withStyles(styles)(MediaCard)
+export default withStyles(styles)(NftCard)

@@ -250,8 +250,6 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     // Overridden IERC721Metadata methods //
     ////////////////////////////////////////
 
-    // TODO proxy through to escrowed NFT
-
     function name() public view returns (string memory) {
         return tokenContract.name();
     }

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import MediaCard from './MediaCard'
+import ForLoanNftCard from './ForLoanNftCard'
 
 const testNFT = require('../testNFT.json')
 
 const styles = {
   marketplace: {
-    
+
   }
 }
 
 class Marketplace extends Component {
-  state = { 
+  state = {
     NFTs: [testNFT]
   }
 
@@ -25,7 +25,7 @@ class Marketplace extends Component {
   }
 
   showMediaCards = () => {
-    return this.state.NFTs.map(item => <MediaCard key={item.name} item={item} />)
+    return this.state.NFTs.map(item => <ForLoanNftCard key={item.name} item={item} />)
   }
 
   render() {
