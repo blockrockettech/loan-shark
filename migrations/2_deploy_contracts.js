@@ -60,6 +60,9 @@ module.exports = async function (deployer, network, accounts) {
     for (let i = 0; i < totalTokens; i++) {
         const tokenId = await loanShark.getTokenIdForIndex(i);
         console.log('Token ID', tokenId, i);
-        console.log(await loanShark.getLoanDetails(i));
+        const loanDetails = await loanShark.getLoanDetails(tokenId);
+        console.log(loanDetails);
+        const {tokenUri} = loanDetails;
+        // make http call - load tokenUri
     }
 };
