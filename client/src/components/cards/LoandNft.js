@@ -1,12 +1,9 @@
 import React from 'react'
 
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Web3 from 'web3'
 
@@ -99,13 +96,16 @@ const styles = {
       color: '#000080'
     }
   },
+  cost: {
+    fontWeight: 600,
+  }
 }
 
 
 const date = (d) => `${new Date(d * 1000).toDateString()} ${new Date(d * 1000).toLocaleTimeString()}`
 
 const shortAddress = (address) => {
- return `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`;
+ return `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`
 }
 
 const toDai = (value) => {
@@ -114,10 +114,12 @@ const toDai = (value) => {
 
 const LoandNft = props =>  {
   const { classes, item = {}, balance = 0, } = props
-
+  const progress = 0 //(balance / depositAmount)
+  console.log(item)
   return (
     <div className={classes.root}>
       <div className={classes.imageContainer}>
+        <CircularProgress variant="static" value={progress} color="#f77725" />
         <img src={item.image} className={classes.image} />
       </div>
       <div className={classes.textGroup}>
@@ -130,7 +132,7 @@ const LoandNft = props =>  {
             To: {date(item.end)}
             <br/>
             <br/>
-            Cost: {toDai(item.balance)}
+            <span className={classes.cost}>⏳Streamed: {toDai(item.balance)}</span>
             <br />
             <br />
             Lender: {shortAddress(item.lender)} <br />

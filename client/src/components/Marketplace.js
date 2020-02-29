@@ -10,8 +10,12 @@ const LoanShark = require('../contracts/LoanShark.json')
 
 const styles = {
   marketplace: {
-
-  }
+  },
+  card: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 6,
+  },
 }
 
 let web3;
@@ -96,7 +100,9 @@ class Marketplace extends Component {
 
     return (
       <div className={classes.marketplace}>
-        {this.showMediaCards()}
+        <div className={classes.card}>
+          {this.showMediaCards()}
+        </div>
       </div>
     )
   }
