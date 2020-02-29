@@ -12,12 +12,13 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(MockDAI);
     const mockDAI = await MockDAI.deployed();
 
-    const deposit = "2999999999999998944000"; // almost 3,000, but not quite
+    const lotsOfCash = "1000000000000000000000000";
+    const deposit =    "2999999999999998944000"; // almost 3,000, but not quite
 
     // Give the first 3 accounts 10k in fake DAI
-    await mockDAI.mint(accounts[0], deposit);
-    await mockDAI.mint(accounts[1], deposit);
-    await mockDAI.mint(accounts[2], deposit);
+    await mockDAI.mint(accounts[0], lotsOfCash);
+    await mockDAI.mint(accounts[1], lotsOfCash);
+    await mockDAI.mint(accounts[2], lotsOfCash);
 
     // Deploy Sablier
     await deployer.deploy(Sablier);
@@ -77,7 +78,7 @@ module.exports = async function (deployer, network, accounts) {
     // await mockDAI.approve(loanShark.address, this.deposit, {from: bob});
 
     // set up one borrow
-    mockDAI.approve(loanShark.address, deposit, {from: borrower});
+    mockDAI.approve(loanShark.address, lotsOfCash, {from: borrower});
 
     await loanShark.borrowToken(1, {from: borrower});
 
