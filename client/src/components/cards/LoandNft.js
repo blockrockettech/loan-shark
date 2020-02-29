@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Web3 from 'web3'
 
 const styles = {
   root: {
@@ -21,8 +22,17 @@ const styles = {
 
 const date = (d) => `${new Date(d * 1000).toDateString()} ${new Date(d * 1000).toLocaleTimeString()}`
 
+const shortAddress = (address) => {
+ return `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`;
+}
+
+const toDai = (value) => {
+ return `$${Web3.utils.fromWei(value, 'ether')}`;
+}
+
 const LoandNft = props =>  {
   const { classes, item = {}, balance = 0, } = props
+
 
   return (
     <Card className={classes.root}>
@@ -42,10 +52,15 @@ const LoandNft = props =>  {
             {/*{item.description}*/}
           </Typography>
             <Typography variant="body2" color="textPrimary" component="p">
-                {date(item.start)} <br/> {date(item.end)}
+                From: {date(item.start)} <br/>
+                To: {date(item.end)}
                 <br/>
                 <br/>
-                {item.balance}
+                Total charged: {toDai(item.balance)}
+                <br />
+                <br />
+                Lender: {shortAddress(item.lender)} <br />
+                Borrower: {shortAddress(item.borrower)}
             </Typography>
         </CardContent>
       </CardActionArea>

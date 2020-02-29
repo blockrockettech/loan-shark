@@ -2607,8 +2607,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.22",
-  "updatedAt": "2020-02-29T16:44:01.751Z",
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2020-02-29T16:46:26.998Z",
   "devdoc": {
     "details": "WhitelistAdmins are responsible for assigning and removing Whitelisted accounts.",
     "methods": {},

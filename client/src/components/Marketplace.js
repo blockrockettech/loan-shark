@@ -34,6 +34,8 @@ class Marketplace extends Component {
     nftsForSale: [],
   }
 
+  timer = null;
+
   componentDidMount = async () => {
     try {
       const networkId = await web3.eth.net.getId()
@@ -44,11 +46,20 @@ class Marketplace extends Component {
       )
 
       this.setState({ web3, contract: instance })
+
       this.getNFTsForSale()
+      this.timer = setInterval(() =>{
+          this.getNFTsForSale()
+      },3000)
+
     } catch (error) {
       console.error(error)
     }
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
 
   getNFTsForSale = async() => {
     // const { contract } = this.props
@@ -70,6 +81,7 @@ class Marketplace extends Component {
         };
         nftsForSale.push(nft)
       }
+      console.log("Loaded for sale NFTs", nftsForSale)
     }
     this.setState({ nftsForSale })
     // this.props.addTokensWithDispatch(nftsForSale)

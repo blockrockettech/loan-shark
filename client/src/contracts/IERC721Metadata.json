@@ -900,8 +900,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.22",
-  "updatedAt": "2020-02-29T16:44:01.771Z",
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2020-02-29T16:46:27.030Z",
   "devdoc": {
     "details": "See https://eips.ethereum.org/EIPS/eip-721",
     "methods": {
