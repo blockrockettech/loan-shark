@@ -19,8 +19,10 @@ const styles = {
   },
 }
 
+const date = (d) => `${new Date(d * 1000).toDateString()} ${new Date(d * 1000).toLocaleTimeString()}`
+
 const LoandNft = props =>  {
-  const { classes, item = {} } = props
+  const { classes, item = {}, balance = 0, } = props
 
   return (
     <Card className={classes.root}>
@@ -37,13 +39,18 @@ const LoandNft = props =>  {
           <Typography variant="body2" color="textSecondary" component="p">
             {item.price}
             {item.duration}
-            {item.description}
+            {/*{item.description}*/}
           </Typography>
+            <Typography variant="body2" color="textPrimary" component="p">
+                {date(item.start)} <br/> {date(item.end)}
+                <br/>
+                <br/>
+                {item.balance}
+            </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
 
-        $10 DAI
 
       </CardActions>
     </Card>

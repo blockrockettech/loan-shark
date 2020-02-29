@@ -61,10 +61,12 @@ class Marketplace extends Component {
       const loanDetails = await contract.methods.getLoanDetails(tokenId).call()
       if (loanDetails.isBorrowed) {
         const tokenUri = await contract.methods.getPrincipleTokenUri(tokenId).call()
+        const balance = await contract.methods.getRemainingStreamBalance(tokenId).call()
         const { data } = await axios.get(tokenUri)
         const nft = {
           ...data,
-          ...loanDetails
+          ...loanDetails,
+          balance,
         };
         nftsForSale.push(nft)
       }
@@ -74,7 +76,7 @@ class Marketplace extends Component {
   }
 
   showMediaCards = () => {
-    return this.state.nftsForSale.map(item => <LoandNft key={item.name} item={item} />)
+    return this.state.nftsForSale.map(item => <LoandNft key={item.name} item={item}/>)
   }
 
   render() {

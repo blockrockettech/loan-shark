@@ -42,8 +42,8 @@ module.exports = async function (deployer, network, accounts) {
     await simpleNft.setApprovalForAll(loanShark.address, true);
 
     const now = Math.round(new Date().getTime() / 1000); // get seconds since unix epoch
-    const startTime = now + 3600; // 1 hour from now
-    const stopTime = now + 2592000 + 3600; // 30 days and 1 hour from now
+    const startTime = now + 60; // 1 min from now
+    const stopTime = now + 2592000 + 60; // 30 days and 1 min from now
 
     // first three tokens are put for loan
     await loanShark.enableTokenForLending(1, startTime, stopTime, deposit, {from: lender});
