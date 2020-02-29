@@ -46,6 +46,23 @@ const styles = {
       color: '#000080'
     }
   },
+  shareButton: {
+    backgroundColor: '#5e6fe6',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'lo',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 280,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#bca049',
+      color: '#000080'
+    }
+  },
   submitButton: {
     backgroundColor: '#b52114',
     fontSize: 12,
@@ -62,6 +79,16 @@ const styles = {
       backgroundColor: '#69120b',
     }
   },
+  formTitle: {
+    marginBottom: 40,
+  },
+  formLabel: {
+    fontWeight: 600,
+    marginBottom: 20,
+  },
+  formInput: {
+    margin: '10px 0 50px 0',
+  }
 }
 
 class NftCard extends Component {
@@ -94,15 +121,18 @@ class NftCard extends Component {
           {this.state.showShareForm ? (
             <>
               <CardContent>
-                <div>Share your NFT by completing the details below</div>
+                <div className={classes.formTitle}>Share your NFT by completing the details below</div>
                 <form>
-                  <label>Total price in DAI</label><input />
-                  <label>Maximum loan duration in seconds</label><input />
+                  <label className={classes.formLabel}>How much $ do you want to earn?</label><div className={classes.formInput}><input /></div>
+                  <label className={classes.formLabel}>How long do you want to share your NFT for? (min)</label><div className={classes.formInput}><input /></div>
                 </form>
               </CardContent>
               <CardActions>
                 <button className={classes.submitButton} onClick={event => this.submitForm(event)}>
                   Submit
+                </button>
+                  <button className={classes.borrowButton} onClick={this.hideShareForm}>
+                    Cancel
                 </button>
               </CardActions>
             </>) : (
@@ -117,12 +147,9 @@ class NftCard extends Component {
                   </div>
                 </CardContent>
                 <CardActions>
-                  <button className={classes.borrowButton} onClick={this.showShareForm}>
+                  <button className={classes.shareButton} onClick={this.showShareForm}>
                     Share
                   </button>
-                  <button className={classes.borrowButton} onClick={this.hideShareForm}>
-                    Cancel
-                </button>
                 </CardActions>
               </div>
             </>
