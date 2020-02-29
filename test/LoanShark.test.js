@@ -30,9 +30,6 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
             {from: creator}
         );
 
-        // give bob some dough...
-        await this.mockDai.mint(bob, ONE_DAI);
-
         console.log(`release the shark: ${this.loanShark.address}`);
 
         await this.simpleNft.mintWithTokenURI(alice, TOKEN_ID_ONE, 'abc', {from: alice}); // Token ID 1
@@ -63,12 +60,28 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
     describe('LoanShark borrow loan', function () {
         it("assert can borrowToken", async function () {
 
-            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.nowThen, this.nowThen.add(new BN('3600')), ONE_DAI, {from: alice});
+            const deposit = new BN("2999999999999998944000"); // almost 3,000, but not quite
+
+            // give bob some dough...
+            await this.mockDai.mint(bob, deposit);
+
+            this.nowThen = await time.latest();
+            const startTime = this.nowThen.add(new BN('3600')); // 1 hour from now
+            const stopTime = startTime.add(new BN('2592000')); // 30 days and 1 hour from now
+
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, startTime, stopTime, deposit, {from: alice});
             (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
-            this.mockDai.approve(this.loanShark.address, ONE_DAI, {from: bob});
+            // allow the shark to escrow
+            this.mockDai.approve(this.loanShark.address, deposit, {from: bob});
 
             await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
+
+            await time.increaseTo(startTime.add(new BN('3602')));
+
+            const bal = await this.loanShark.getRemainingStreamBalance.call(TOKEN_ID_ONE, bob, {from: bob});
+
+            console.log(bal.toString());
         });
     });
 });
