@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from 'react-redux'
-import { addTokens, addWeb3, addContract } from './store/actions'
 import Onboard from 'bnc-onboard'
 import Web3 from 'web3'
 import {
@@ -13,10 +12,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Header from './components/Header'
 import Marketplace from './components/Marketplace'
 import MyNFTs from './components/MyNFTs'
-
-const axios = require('axios')
-
-const LoanShark = require('./contracts/LoanShark.json')
 
 let web3
 
@@ -50,9 +45,6 @@ const onboard = Onboard({
 class App extends Component {
   state = {
     web3: null,
-    accounts: null,
-    contract: null,
-    nftsForSale: [],
   }
 
   componentDidMount = async () => {
@@ -61,19 +53,7 @@ class App extends Component {
       // Get network provider and web3 instance from Onboard.js
       await onboard.walletSelect()
       await onboard.walletCheck()
-
-      const networkId = await web3.eth.net.getId()
-      const deployedNetwork = LoanShark.networks[networkId]
-      const instance = new web3.eth.Contract(
-        LoanShark.abi,
-        deployedNetwork && deployedNetwork.address,
-      )
-
-      // this.props.addWeb3WithDispatch(web3)
-      // this.props.addContractWithDispatch(instance)
-
-      this.setState({ web3, contract: instance })
-      this.getNFTsForSale()
+      this.setState({ web3 })
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -81,27 +61,6 @@ class App extends Component {
       console.error(error)
     }
   };
-
-  getNFTsForSale = async() => {
-    // const { contract } = this.props
-    const { contract } = this.state
-    const totalTokens = await contract.methods.totalTokens().call()
-    const nftsForSale = []
-
-    for (let i = 0; i < totalTokens; i++) {
-      const tokenId = await contract.methods.getTokenIdForIndex(i).call()
-      const loanDetails = await contract.methods.getLoanDetails(tokenId).call()
-      const tokenUri = await contract.methods.getPrincipleTokenUri(tokenId).call()
-      const { data } = await axios.get(tokenUri)
-      const nft = {
-        ...data,
-        ...loanDetails
-      }
-      nftsForSale.push(nft)
-    }
-    this.setState({ nftsForSale })
-    // this.props.addTokensWithDispatch(nftsForSale)
-  }
 
   render() {
     const { classes } = this.props
@@ -112,12 +71,6 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          {/*<Route exact path="/user">*/}
-          {/*  <div className={classes.app}>*/}
-          {/*    <Header />*/}
-          {/*    */}
-          {/*  </div>*/}
-          {/*</Route>*/}
           <Route exact path="/borrow">
             <div className={classes.app}>
               <Header />
@@ -151,22 +104,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    web3: state.web3,
-    nftsForSale: state.nftsForSale,
-    contract: state.contract,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addTokensWithDispatch: tokens => dispatch(addTokens(tokens)), 
-    addContractWithDispatch: contract => dispatch(addContract(contract)), 
-    addWeb3WithDispatch: web3 => dispatch(addWeb3(web3)) 
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App))
+export default withStyles(styles)(App)
 
