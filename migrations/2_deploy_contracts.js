@@ -27,7 +27,7 @@ module.exports = async function (deployer, network, accounts) {
     const loanShark = await LoanShark.deployed();
 
     const lender = accounts[0];
-    const borrower = accounts[1];
+    const borrower = accounts[0];
 
     // KO
     await simpleNft.mintWithTokenURI(lender, 1, 'https://ipfs.infura.io/ipfs/QmV9QM5P5C3rPVMh8fL6FFnfzqqP5RvHDSZEiRdVZJPda3', {from: lender});
@@ -39,10 +39,13 @@ module.exports = async function (deployer, network, accounts) {
     // Enable approval for all for the loan shark address
     await simpleNft.setApprovalForAll(loanShark.address, true);
 
+    const start = Math.round(new Date().getTime() / 1000);
+    const end = Math.round(start + 3600);
+
     // first three tokens are put for loan
-    await loanShark.enableTokenForLending(1, 0, 100000000, 100000, {from: lender});
-    await loanShark.enableTokenForLending(2, 0, 100000000, 100000, {from: lender});
-    await loanShark.enableTokenForLending(3, 0, 100000000, 100000, {from: lender});
+    await loanShark.enableTokenForLending(1, start, end, 10000000, {from: lender});
+    await loanShark.enableTokenForLending(2, start, end, 10000000, {from: lender});
+    await loanShark.enableTokenForLending(3, start, end, 10000000, {from: lender});
 
     // Next three tokens are minted to but not put on loan so we can defo that flow
 
@@ -53,17 +56,21 @@ module.exports = async function (deployer, network, accounts) {
     // Axie infinity
     await simpleNft.mintWithTokenURI(lender, 6, 'https://axieinfinity.com/api/axies/14514', {from: lender});
 
-    // Print out all tokens which have been put up for loan
-    const totalTokens = await loanShark.totalTokens();
-    // console.log('Total tokens', totalTokens);
+    // // Print out all tokens which have been put up for loan
+    // const totalTokens = await loanShark.totalTokens();
+    // // console.log('Total tokens', totalTokens);
+    //
+    // for (let i = 0; i < totalTokens; i++) {
+    //     const tokenId = await loanShark.getTokenIdForIndex(i);
+    //
+    //     // console.log('Token ID', tokenId, i);
+    //     const loanDetails = await loanShark.getLoanDetails(tokenId);
+    //
+    //     const {tokenUri} = loanDetails;
+    //     // make http call - load tokenUri
+    // }
 
-    for (let i = 0; i < totalTokens; i++) {
-        const tokenId = await loanShark.getTokenIdForIndex(i);
+    // await loanShark.borrowToken(1, {from: borrower});
+    // await mockDAI.approve(loanShark.address, this.deposit, {from: bob});
 
-        // console.log('Token ID', tokenId, i);
-        const loanDetails = await loanShark.getLoanDetails(tokenId);
-
-        const {tokenUri} = loanDetails;
-        // make http call - load tokenUri
-    }
 };

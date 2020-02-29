@@ -34,7 +34,7 @@ const NftCard = props =>  {
           <Typography gutterBottom variant="h5" component="h2">
             {item.name}
           </Typography>
-        </CardContent>  
+        </CardContent>
       </CardActionArea>
       <CardActions>
 
