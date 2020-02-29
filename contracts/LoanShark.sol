@@ -42,6 +42,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     uint256 public totalTokens = 0;
     mapping(uint256 => uint256) public indexToTokenId;
 
+    mapping(uint256 => uint256) public tokenIdToStreamId;
+
     constructor(
         IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
         IERC20 _paymentToken, // DAI ... or even zkDAI ?
@@ -133,8 +135,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         paymentToken.transferFrom(msg.sender, address(this), loan.depositInWei);
 
         // this will pull the escrowed amount into the stream
-        stream.createStream(msg.sender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
+        uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
+        tokenIdToStreamId[_tokenId] = streamId;
         return true;
     }
 
@@ -192,9 +195,24 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return 0;
     }
 
-    function getRemainingStreamBalance(uint _tokenId, address who) public returns (uint256) {
-        // TODO
-        return stream.balanceOf(1, who);
+    function getRemainingStreamBalance(uint _tokenId) public returns (uint256) {
+        uint256 streamId = tokenIdToStreamId[_tokenId];
+        require(streamId > 0, "Must have a stream");
+
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        require(msg.sender == loan.lender, "Must be lender");
+
+        return stream.balanceOf(streamId, loan.lender);
+    }
+
+    function withdraw(uint _tokenId) public returns (bool) {
+        uint256 streamId = tokenIdToStreamId[_tokenId];
+        require(streamId > 0, "Must have a stream");
+
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        require(msg.sender == loan.lender, "Must be lender");
+
+        return stream.withdrawFromStream(streamId, stream.balanceOf(streamId, loan.lender));
     }
 
     ////////////////////
