@@ -21,8 +21,17 @@ module.exports = async function (deployer, network, accounts) {
     await loanShark.enableTokenForLending(1, 100000000, 100000);
     await loanShark.enableTokenForLending(2, 100000000, 100000);
     await loanShark.enableTokenForLending(3, 100000000, 100000);
-    
-    console.log(await loanShark.getLoanDetails(1));
-    console.log(await loanShark.getLoanDetails(2));
-    console.log(await loanShark.getLoanDetails(3));
+
+    // console.log(await loanShark.getLoanDetails(1));
+    // console.log(await loanShark.getLoanDetails(2));
+    // console.log(await loanShark.getLoanDetails(3));
+
+    const totalTokens = await loanShark.totalTokens();
+    console.log('Total tokens', totalTokens);
+
+    for (let i = 0; i < totalTokens; i++) {
+        const tokenId = await loanShark.getTokenIdForIndex(i);
+        console.log('Token ID', tokenId, i);
+        console.log(await loanShark.getLoanDetails(i));
+    }
 };

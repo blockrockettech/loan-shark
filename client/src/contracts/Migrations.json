@@ -890,12 +890,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x45B3a2DBB88A9E83677308b375762233679Db639",
-      "transactionHash": "0x4612ab94296200875a074e83df08edb57c842cb71a988127b56d70d5112f72f4"
+      "address": "0x6cDf13ddd381818274ba02957fFffD74578D2be3",
+      "transactionHash": "0xab1c4e94125e6191508ed26459eca701c3c2d5b5d73a18c68b7ab5c36f167a71"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T00:08:35.880Z",
+  "updatedAt": "2020-02-29T00:38:10.923Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

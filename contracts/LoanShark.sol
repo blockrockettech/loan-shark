@@ -31,6 +31,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     mapping(uint256 => Loan) public tokensAvailableToLoan;
 
     // So we can enumerate them
+    uint256 public totalTokens = 0;
     mapping(uint256 => uint256) public indexToTokenId;
 
     constructor(
@@ -71,6 +72,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // Escrow NFT into the Loan Shark Contract
         tokenContract.safeTransferFrom(msg.sender, address(this), _tokenId);
         require(isTokenEscrowed(_tokenId), "Token not correctly escrowed");
+
+        // Setup simple enumeration
+        indexToTokenId[totalTokens] = _tokenId;
+        totalTokens = totalTokens + 1;
 
         return true;
     }
@@ -179,6 +184,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     ////////////////////
     // Internal utils //
     ////////////////////
+
+    function getTokenIdForIndex(uint256 _index) public view returns (uint256) {
+        return indexToTokenId[_index];
+    }
 
     // taking ownership of the NFT via callback confirmation
     function onERC721Received(address operator, address from, uint256 tokenId, bytes memory data) public returns (bytes4) {
