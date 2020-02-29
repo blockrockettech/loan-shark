@@ -38,6 +38,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     mapping(uint256 => Loan) public tokensAvailableToLoan;
 
+    mapping(address => uint256[]) public lenderToTokenId;
+
     // So we can enumerate them
     uint256 public totalTokens = 0;
     mapping(uint256 => uint256) public indexToTokenId;
@@ -56,7 +58,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         stream = _stream;
 
         // approve the stream to pull whatever they want from LoanShark
-        paymentToken.approve(address(stream), uint(-1));
+        paymentToken.approve(address(stream), uint(- 1));
     }
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
@@ -92,6 +94,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // Setup simple enumeration
         indexToTokenId[totalTokens] = _tokenId;
         totalTokens = totalTokens + 1;
+
+        // setup simple lender mapping
+        lenderToTokenId[msg.sender].push(_tokenId);
 
         return true;
     }
@@ -221,6 +226,11 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     function getTokenIdForIndex(uint256 _index) public view returns (uint256) {
         return indexToTokenId[_index];
+    }
+
+    function getTokensLenderIsBorrowing(address _lender) public view returns (uint256[] memory) {
+        uint256[] memory tokenIds = lenderToTokenId[_lender];
+        return tokenIds;
     }
 
     // taking ownership of the NFT via callback confirmation

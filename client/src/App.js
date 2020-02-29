@@ -46,11 +46,11 @@ const onboard = Onboard({
 })
 
 class App extends Component {
-  state = { 
-    web3: null, 
-    accounts: null, 
+  state = {
+    web3: null,
+    accounts: null,
     contract: null,
-    nftsForSale: [], 
+    nftsForSale: [],
   }
 
   componentDidMount = async () => {
@@ -108,12 +108,12 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/user">
-            <div className={classes.app}>
-              <Header />
-              <MyNFTs />
-            </div>
-          </Route>
+          {/*<Route exact path="/user">*/}
+          {/*  <div className={classes.app}>*/}
+          {/*    <Header />*/}
+          {/*    */}
+          {/*  </div>*/}
+          {/*</Route>*/}
           <Route exact path="/borrow">
             <div className={classes.app}>
               <Header />
@@ -123,7 +123,7 @@ class App extends Component {
           <Route exact path="/loan">
             <div className={classes.app}>
               <Header />
-              Loan your NFTs!
+              <MyNFTs />
             </div>
           </Route>
           <Route exact path="/about">
