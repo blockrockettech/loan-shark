@@ -11,6 +11,8 @@ const styles = {
     fontFamily: 'Spartan',
   },
   smalllogo: {
+    display: 'flex',
+    alignItems: 'center'
   },
   text: {
     fontSize: 72,
@@ -27,7 +29,6 @@ const styles = {
     margin: '5px 0'
   }
 }
-
 const Header = props => {
   const { classes } = props
   return (
@@ -36,6 +37,8 @@ const Header = props => {
         <Link className={classes.link} to="/">
           <img height="100" src="SharkIcon2.png" alt="smalllogo" />
         </Link>
+        <img height="50" src="https://camo.githubusercontent.com/e4a40ffa9d4c7c037871862dbf0d1ae8a6f307ee/68747470733a2f2f692e696d6775722e636f6d2f713655485474312e706e67" alt="sablierlogo" />
+        <img height="50" src="https://sfo2.digitaloceanspaces.com/engamb/wp-content/uploads/2019/10/09141745/NEW-dai-logo-e1570610882413.png" alt="dailogo" />
       </div>
       <div className={classes.logo}><img src="/Loansharklogo.png" alt="logo" /></div>
       <div className={classes.menu}>
