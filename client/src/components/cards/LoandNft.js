@@ -73,6 +73,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative'
   },
   image: {
     maxWidth: 250,
@@ -98,6 +99,17 @@ const styles = {
   },
   cost: {
     fontWeight: 600,
+  },
+  progressTracker: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    borderRadius: '50%',
+    backgroundColor: '#fac153',
+    margin: '15px 15px 0 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center,'
   }
 }
 
@@ -116,15 +128,16 @@ const LoandNft = props =>  {
   const {
     classes,
     item = {},
-    balance = 0,
     onReturnAssetClicked = (item) => {},
-    progress = 0
   } = props
+
+  const progress = (item.balance/item.depositInWei)*100
+  console.log('Progress %', progress)
 
   return (
     <div className={classes.root}>
       <div className={classes.imageContainer}>
-        <CircularProgress variant="static" value={progress} color="#f77725" />
+        <div className={classes.progressTracker}><CircularProgress variant="static" value={progress} /></div>
         <img src={item.image} className={classes.image} />
       </div>
       <div className={classes.textGroup}>
