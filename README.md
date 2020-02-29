@@ -1,6 +1,6 @@
 # LoanShark
 
-## In a nushell
+## In a nutshell
 
 You are facing the end of level boss but you have tuned up without the necessary weapons for this monster battle.
 
