@@ -130,7 +130,6 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
                 await time.increaseTo(this.startTime.add(new BN(3600)));
 
                 await this.loanShark.cancel(TOKEN_ID_ONE, {from: alice});
-                console.log('Payment stream cancelled: ' + cancelSuccess.toString());
 
                 let newAliceDaiBalance = await this.mockDai.balanceOf(alice);
                 let newBobDaiBalance = await this.mockDai.balanceOf(bob);
