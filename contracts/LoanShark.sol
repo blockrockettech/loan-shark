@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/access/roles/WhitelistedRole.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Full.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
-import "./IERC1620.sol";
+import "./sablier/IERC1620.sol";
 
 contract LoanShark is ERC721Full, WhitelistedRole {
 
