@@ -12,14 +12,14 @@
     "absolutePath": "/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/Types.sol",
     "exportedSymbols": {
       "Types": [
-        1815
+        1821
       ]
     },
-    "id": 1816,
+    "id": 1822,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1795,
+        "id": 1801,
         "literals": [
           "solidity",
           "0.5",
@@ -34,23 +34,23 @@
         "contractKind": "library",
         "documentation": "@title Sablier Types\n@author Sablier",
         "fullyImplemented": true,
-        "id": 1815,
+        "id": 1821,
         "linearizedBaseContracts": [
-          1815
+          1821
         ],
         "name": "Types",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Types.Stream",
-            "id": 1814,
+            "id": 1820,
             "members": [
               {
                 "constant": false,
-                "id": 1797,
+                "id": 1803,
                 "name": "deposit",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "120:15:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -59,7 +59,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1796,
+                  "id": 1802,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "120:7:6",
@@ -73,10 +73,10 @@
               },
               {
                 "constant": false,
-                "id": 1799,
+                "id": 1805,
                 "name": "ratePerSecond",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "145:21:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -85,7 +85,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1798,
+                  "id": 1804,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "145:7:6",
@@ -99,10 +99,10 @@
               },
               {
                 "constant": false,
-                "id": 1801,
+                "id": 1807,
                 "name": "remainingBalance",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "176:24:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -111,7 +111,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1800,
+                  "id": 1806,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "176:7:6",
@@ -125,10 +125,10 @@
               },
               {
                 "constant": false,
-                "id": 1803,
+                "id": 1809,
                 "name": "startTime",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "210:17:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -137,7 +137,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1802,
+                  "id": 1808,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "210:7:6",
@@ -151,10 +151,10 @@
               },
               {
                 "constant": false,
-                "id": 1805,
+                "id": 1811,
                 "name": "stopTime",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "237:16:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -163,7 +163,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1804,
+                  "id": 1810,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "237:7:6",
@@ -177,10 +177,10 @@
               },
               {
                 "constant": false,
-                "id": 1807,
+                "id": 1813,
                 "name": "recipient",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "263:17:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -189,7 +189,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1806,
+                  "id": 1812,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "263:7:6",
@@ -204,10 +204,10 @@
               },
               {
                 "constant": false,
-                "id": 1809,
+                "id": 1815,
                 "name": "sender",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "290:14:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -216,7 +216,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1808,
+                  "id": 1814,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "290:7:6",
@@ -231,10 +231,10 @@
               },
               {
                 "constant": false,
-                "id": 1811,
+                "id": 1817,
                 "name": "tokenAddress",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "314:20:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -243,7 +243,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1810,
+                  "id": 1816,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "314:7:6",
@@ -258,10 +258,10 @@
               },
               {
                 "constant": false,
-                "id": 1813,
+                "id": 1819,
                 "name": "isEntity",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "344:13:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -270,7 +270,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 1812,
+                  "id": 1818,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "344:4:6",
@@ -285,12 +285,12 @@
             ],
             "name": "Stream",
             "nodeType": "StructDefinition",
-            "scope": 1815,
+            "scope": 1821,
             "src": "96:268:6",
             "visibility": "public"
           }
         ],
-        "scope": 1816,
+        "scope": 1822,
         "src": "76:290:6"
       }
     ],
@@ -300,14 +300,14 @@
     "absolutePath": "/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/Types.sol",
     "exportedSymbols": {
       "Types": [
-        1815
+        1821
       ]
     },
-    "id": 1816,
+    "id": 1822,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1795,
+        "id": 1801,
         "literals": [
           "solidity",
           "0.5",
@@ -322,23 +322,23 @@
         "contractKind": "library",
         "documentation": "@title Sablier Types\n@author Sablier",
         "fullyImplemented": true,
-        "id": 1815,
+        "id": 1821,
         "linearizedBaseContracts": [
-          1815
+          1821
         ],
         "name": "Types",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Types.Stream",
-            "id": 1814,
+            "id": 1820,
             "members": [
               {
                 "constant": false,
-                "id": 1797,
+                "id": 1803,
                 "name": "deposit",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "120:15:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -347,7 +347,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1796,
+                  "id": 1802,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "120:7:6",
@@ -361,10 +361,10 @@
               },
               {
                 "constant": false,
-                "id": 1799,
+                "id": 1805,
                 "name": "ratePerSecond",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "145:21:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -373,7 +373,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1798,
+                  "id": 1804,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "145:7:6",
@@ -387,10 +387,10 @@
               },
               {
                 "constant": false,
-                "id": 1801,
+                "id": 1807,
                 "name": "remainingBalance",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "176:24:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -399,7 +399,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1800,
+                  "id": 1806,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "176:7:6",
@@ -413,10 +413,10 @@
               },
               {
                 "constant": false,
-                "id": 1803,
+                "id": 1809,
                 "name": "startTime",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "210:17:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -425,7 +425,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1802,
+                  "id": 1808,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "210:7:6",
@@ -439,10 +439,10 @@
               },
               {
                 "constant": false,
-                "id": 1805,
+                "id": 1811,
                 "name": "stopTime",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "237:16:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -451,7 +451,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1804,
+                  "id": 1810,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "237:7:6",
@@ -465,10 +465,10 @@
               },
               {
                 "constant": false,
-                "id": 1807,
+                "id": 1813,
                 "name": "recipient",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "263:17:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -477,7 +477,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1806,
+                  "id": 1812,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "263:7:6",
@@ -492,10 +492,10 @@
               },
               {
                 "constant": false,
-                "id": 1809,
+                "id": 1815,
                 "name": "sender",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "290:14:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -504,7 +504,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1808,
+                  "id": 1814,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "290:7:6",
@@ -519,10 +519,10 @@
               },
               {
                 "constant": false,
-                "id": 1811,
+                "id": 1817,
                 "name": "tokenAddress",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "314:20:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -531,7 +531,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 1810,
+                  "id": 1816,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "314:7:6",
@@ -546,10 +546,10 @@
               },
               {
                 "constant": false,
-                "id": 1813,
+                "id": 1819,
                 "name": "isEntity",
                 "nodeType": "VariableDeclaration",
-                "scope": 1814,
+                "scope": 1820,
                 "src": "344:13:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -558,7 +558,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 1812,
+                  "id": 1818,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "344:4:6",
@@ -573,12 +573,12 @@
             ],
             "name": "Stream",
             "nodeType": "StructDefinition",
-            "scope": 1815,
+            "scope": 1821,
             "src": "96:268:6",
             "visibility": "public"
           }
         ],
-        "scope": 1816,
+        "scope": 1822,
         "src": "76:290:6"
       }
     ],
@@ -590,7 +590,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T12:45:56.982Z",
+  "updatedAt": "2020-02-29T12:48:52.248Z",
   "devdoc": {
     "author": "Sablier",
     "methods": {},

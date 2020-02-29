@@ -74,7 +74,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         tokensAvailableToLoan[_tokenId] = Loan({
             tokenId : _tokenId,
             lender : msg.sender,
-            borrower : address(this),
+            borrower : address(0x0),
 
             isEscrowed : true,
             isBorrowed : false,
@@ -138,7 +138,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         paymentToken.transferFrom(msg.sender, address(this), loan.depositInWei);
 
         // this will pull the escrowed amount into the stream
-        stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
+        stream.createStream(msg.sender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
         return true;
     }
@@ -197,9 +197,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return 0;
     }
 
-    function getRemainingStreamBalance(uint _tokenId) public returns (uint256) {
+    function getRemainingStreamBalance(uint _tokenId, address who) public returns (uint256) {
         // TODO
-        return 0;
+        return stream.balanceOf(1, who);
     }
 
     ////////////////////
