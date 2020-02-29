@@ -104,6 +104,9 @@ class NftCard extends Component {
                 <button className={classes.submitButton} onClick={event => this.submitForm(event)}>
                   Submit
                 </button>
+                  <button className={classes.borrowButton} onClick={this.hideShareForm}>
+                    Cancel
+                </button>
               </CardActions>
             </>) : (
             <>
@@ -120,9 +123,6 @@ class NftCard extends Component {
                   <button className={classes.borrowButton} onClick={this.showShareForm}>
                     Share
                   </button>
-                  <button className={classes.borrowButton} onClick={this.hideShareForm}>
-                    Cancel
-                </button>
                 </CardActions>
               </div>
             </>
