@@ -48,11 +48,12 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
         this.nowThen = await time.latest();
         this.startTime = this.nowThen.add(new BN('3600')); // 1 hour from now
         this.stopTime = this.startTime.add(new BN('2592000')); // 30 days and 1 hour from now
+        this.periodInSecs = this.stopTime.sub(this.startTime);
     });
 
     describe('LoanShark enable loan', function () {
         it("assert can enableTokenForLending", async function () {
-            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.nowThen, this.nowThen.add(new BN('3600')), ONE_DAI, {from: alice});
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.periodInSecs, ONE_DAI, {from: alice});
 
             (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
@@ -62,6 +63,7 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
             loanOffer.tokenId.should.be.bignumber.equal('1');
             loanOffer.isEscrowed.should.be.equal(true);
             loanOffer.isBorrowed.should.be.equal(false);
+            loanOffer.periodInSecs.should.be.bignumber.equal(this.periodInSecs);
             loanOffer.depositInWei.should.be.bignumber.equal(ONE_DAI);
         });
     });
@@ -69,7 +71,7 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
     describe('LoanShark borrow loan', function () {
         it("assert can borrowToken and see balance increase over time", async function () {
 
-            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.periodInSecs, this.deposit, {from: alice});
             (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
             // allow the shark to escrow
@@ -94,7 +96,7 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
 
             let originalDaiBalance = await this.mockDai.balanceOf(alice);
 
-            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.periodInSecs, this.deposit, {from: alice});
             (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
             // allow the shark to escrow
@@ -118,7 +120,7 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
             let originalAliceDaiBalance = await this.mockDai.balanceOf(alice);
             let originalBobDaiBalance = await this.mockDai.balanceOf(bob);
 
-            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.periodInSecs, this.deposit, {from: alice});
             (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
             // allow the shark to escrow

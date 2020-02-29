@@ -19,14 +19,14 @@
     "absolutePath": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
     "exportedSymbols": {
       "ReentrancyGuard": [
-        5925
+        5960
       ]
     },
-    "id": 5926,
+    "id": 5961,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5897,
+        "id": 5932,
         "literals": [
           "solidity",
           "^",
@@ -42,19 +42,19 @@
         "contractKind": "contract",
         "documentation": "@dev Contract module that helps prevent reentrant calls to a function.\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\navailable, which can be applied to functions to make sure there are no nested\n(reentrant) calls to them.\n * Note that because there is a single `nonReentrant` guard, functions marked as\n`nonReentrant` may not call one another. This can be worked around by making\nthose functions `private`, and then adding `external` `nonReentrant` entry\npoints to them.\n * TIP: If you would like to learn more about reentrancy and alternative ways\nto protect against it, check out our blog post\nhttps://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\n * _Since v2.5.0:_ this module is now much more gas efficient, given net gas\nmetering changes introduced in the Istanbul hardfork.",
         "fullyImplemented": true,
-        "id": 5925,
+        "id": 5960,
         "linearizedBaseContracts": [
-          5925
+          5960
         ],
         "name": "ReentrancyGuard",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 5899,
+            "id": 5934,
             "name": "_notEntered",
             "nodeType": "VariableDeclaration",
-            "scope": 5925,
+            "scope": 5960,
             "src": "944:24:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -63,7 +63,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 5898,
+              "id": 5933,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "944:4:35",
@@ -77,25 +77,25 @@
           },
           {
             "body": {
-              "id": 5906,
+              "id": 5941,
               "nodeType": "Block",
               "src": "999:447:35",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5904,
+                    "id": 5939,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5902,
+                      "id": 5937,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "1421:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -107,7 +107,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 5903,
+                      "id": 5938,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -128,32 +128,32 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5905,
+                  "id": 5940,
                   "nodeType": "ExpressionStatement",
                   "src": "1421:18:35"
                 }
               ]
             },
             "documentation": null,
-            "id": 5907,
+            "id": 5942,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5900,
+              "id": 5935,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "987:2:35"
             },
             "returnParameters": {
-              "id": 5901,
+              "id": 5936,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "999:0:35"
             },
-            "scope": 5925,
+            "scope": 5960,
             "src": "975:471:35",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -161,7 +161,7 @@
           },
           {
             "body": {
-              "id": 5923,
+              "id": 5958,
               "nodeType": "Block",
               "src": "1845:410:35",
               "statements": [
@@ -171,11 +171,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 5910,
+                        "id": 5945,
                         "name": "_notEntered",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5899,
+                        "referencedDeclaration": 5934,
                         "src": "1934:11:35",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -185,7 +185,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5265656e7472616e637947756172643a207265656e7472616e742063616c6c",
-                        "id": 5911,
+                        "id": 5946,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -212,21 +212,21 @@
                           "typeString": "literal_string \"ReentrancyGuard: reentrant call\""
                         }
                       ],
-                      "id": 5909,
+                      "id": 5944,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        5943,
-                        5944
+                        5978,
+                        5979
                       ],
-                      "referencedDeclaration": 5944,
+                      "referencedDeclaration": 5979,
                       "src": "1926:7:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 5912,
+                    "id": 5947,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -240,25 +240,25 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 5913,
+                  "id": 5948,
                   "nodeType": "ExpressionStatement",
                   "src": "1926:55:35"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5916,
+                    "id": 5951,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5914,
+                      "id": 5949,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "2056:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -270,7 +270,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 5915,
+                      "id": 5950,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -291,30 +291,30 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5917,
+                  "id": 5952,
                   "nodeType": "ExpressionStatement",
                   "src": "2056:19:35"
                 },
                 {
-                  "id": 5918,
+                  "id": 5953,
                   "nodeType": "PlaceholderStatement",
                   "src": "2086:1:35"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5921,
+                    "id": 5956,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5919,
+                      "id": 5954,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "2230:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -326,7 +326,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 5920,
+                      "id": 5955,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -347,18 +347,18 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5922,
+                  "id": 5957,
                   "nodeType": "ExpressionStatement",
                   "src": "2230:18:35"
                 }
               ]
             },
             "documentation": "@dev Prevents a contract from calling itself, directly or indirectly.\nCalling a `nonReentrant` function from another `nonReentrant`\nfunction is not supported. It is possible to prevent this from happening\nby making the `nonReentrant` function external, and make it call a\n`private` function that does the actual work.",
-            "id": 5924,
+            "id": 5959,
             "name": "nonReentrant",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 5908,
+              "id": 5943,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1842:2:35"
@@ -367,7 +367,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 5926,
+        "scope": 5961,
         "src": "913:1344:35"
       }
     ],
@@ -377,14 +377,14 @@
     "absolutePath": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
     "exportedSymbols": {
       "ReentrancyGuard": [
-        5925
+        5960
       ]
     },
-    "id": 5926,
+    "id": 5961,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5897,
+        "id": 5932,
         "literals": [
           "solidity",
           "^",
@@ -400,19 +400,19 @@
         "contractKind": "contract",
         "documentation": "@dev Contract module that helps prevent reentrant calls to a function.\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\navailable, which can be applied to functions to make sure there are no nested\n(reentrant) calls to them.\n * Note that because there is a single `nonReentrant` guard, functions marked as\n`nonReentrant` may not call one another. This can be worked around by making\nthose functions `private`, and then adding `external` `nonReentrant` entry\npoints to them.\n * TIP: If you would like to learn more about reentrancy and alternative ways\nto protect against it, check out our blog post\nhttps://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\n * _Since v2.5.0:_ this module is now much more gas efficient, given net gas\nmetering changes introduced in the Istanbul hardfork.",
         "fullyImplemented": true,
-        "id": 5925,
+        "id": 5960,
         "linearizedBaseContracts": [
-          5925
+          5960
         ],
         "name": "ReentrancyGuard",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 5899,
+            "id": 5934,
             "name": "_notEntered",
             "nodeType": "VariableDeclaration",
-            "scope": 5925,
+            "scope": 5960,
             "src": "944:24:35",
             "stateVariable": true,
             "storageLocation": "default",
@@ -421,7 +421,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 5898,
+              "id": 5933,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "944:4:35",
@@ -435,25 +435,25 @@
           },
           {
             "body": {
-              "id": 5906,
+              "id": 5941,
               "nodeType": "Block",
               "src": "999:447:35",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5904,
+                    "id": 5939,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5902,
+                      "id": 5937,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "1421:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -465,7 +465,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 5903,
+                      "id": 5938,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -486,32 +486,32 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5905,
+                  "id": 5940,
                   "nodeType": "ExpressionStatement",
                   "src": "1421:18:35"
                 }
               ]
             },
             "documentation": null,
-            "id": 5907,
+            "id": 5942,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5900,
+              "id": 5935,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "987:2:35"
             },
             "returnParameters": {
-              "id": 5901,
+              "id": 5936,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "999:0:35"
             },
-            "scope": 5925,
+            "scope": 5960,
             "src": "975:471:35",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -519,7 +519,7 @@
           },
           {
             "body": {
-              "id": 5923,
+              "id": 5958,
               "nodeType": "Block",
               "src": "1845:410:35",
               "statements": [
@@ -529,11 +529,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 5910,
+                        "id": 5945,
                         "name": "_notEntered",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5899,
+                        "referencedDeclaration": 5934,
                         "src": "1934:11:35",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -543,7 +543,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5265656e7472616e637947756172643a207265656e7472616e742063616c6c",
-                        "id": 5911,
+                        "id": 5946,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -570,21 +570,21 @@
                           "typeString": "literal_string \"ReentrancyGuard: reentrant call\""
                         }
                       ],
-                      "id": 5909,
+                      "id": 5944,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        5943,
-                        5944
+                        5978,
+                        5979
                       ],
-                      "referencedDeclaration": 5944,
+                      "referencedDeclaration": 5979,
                       "src": "1926:7:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 5912,
+                    "id": 5947,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -598,25 +598,25 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 5913,
+                  "id": 5948,
                   "nodeType": "ExpressionStatement",
                   "src": "1926:55:35"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5916,
+                    "id": 5951,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5914,
+                      "id": 5949,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "2056:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -628,7 +628,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 5915,
+                      "id": 5950,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -649,30 +649,30 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5917,
+                  "id": 5952,
                   "nodeType": "ExpressionStatement",
                   "src": "2056:19:35"
                 },
                 {
-                  "id": 5918,
+                  "id": 5953,
                   "nodeType": "PlaceholderStatement",
                   "src": "2086:1:35"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5921,
+                    "id": 5956,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5919,
+                      "id": 5954,
                       "name": "_notEntered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5899,
+                      "referencedDeclaration": 5934,
                       "src": "2230:11:35",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -684,7 +684,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 5920,
+                      "id": 5955,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -705,18 +705,18 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 5922,
+                  "id": 5957,
                   "nodeType": "ExpressionStatement",
                   "src": "2230:18:35"
                 }
               ]
             },
             "documentation": "@dev Prevents a contract from calling itself, directly or indirectly.\nCalling a `nonReentrant` function from another `nonReentrant`\nfunction is not supported. It is possible to prevent this from happening\nby making the `nonReentrant` function external, and make it call a\n`private` function that does the actual work.",
-            "id": 5924,
+            "id": 5959,
             "name": "nonReentrant",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 5908,
+              "id": 5943,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1842:2:35"
@@ -725,7 +725,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 5926,
+        "scope": 5961,
         "src": "913:1344:35"
       }
     ],
@@ -736,8 +736,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T20:47:45.461Z",
+  "schemaVersion": "3.0.22",
+  "updatedAt": "2020-02-29T22:02:59.480Z",
   "devdoc": {
     "details": "Contract module that helps prevent reentrant calls to a function. * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier available, which can be applied to functions to make sure there are no nested (reentrant) calls to them. * Note that because there is a single `nonReentrant` guard, functions marked as `nonReentrant` may not call one another. This can be worked around by making those functions `private`, and then adding `external` `nonReentrant` entry points to them. * TIP: If you would like to learn more about reentrancy and alternative ways to protect against it, check out our blog post https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul]. * _Since v2.5.0:_ this module is now much more gas efficient, given net gas metering changes introduced in the Istanbul hardfork.",
     "methods": {}

@@ -16,7 +16,7 @@ module.exports = async function (deployer, network, accounts) {
     const borrower = accounts[0];
 
     const lotsOfCash = "10000000000000000000000000"; // lots of dollar!
-    const deposit =    "2999999999999998944000"; // almost 3,000, but not quite
+    const deposit =    "36000000000000000"; // almost 0.036 - but not quite
 
     // Give the first 3 accounts 10k in fake DAI
     await mockDAI.mint(accounts[0], lotsOfCash);
@@ -41,14 +41,16 @@ module.exports = async function (deployer, network, accounts) {
     // Enable approval for all for the loan shark address
     await simpleNft.setApprovalForAll(loanShark.address, true);
 
+    const periodInSecs = 3600;
+
     const now = Math.round(new Date().getTime() / 1000); // get seconds since unix epoch
     const startTime = now + 60; // 1 min from now
-    const stopTime = now + 2592000 + 60; // 30 days and 1 min from now
+    const stopTime = now + periodInSecs + 60; // 30 days and 1 min from now
 
     // first three tokens are put for loan
-    await loanShark.enableTokenForLending(1, startTime, stopTime, deposit, {from: lender});
-    await loanShark.enableTokenForLending(2, startTime, stopTime, deposit, {from: lender});
-    await loanShark.enableTokenForLending(3, startTime, stopTime, deposit, {from: lender});
+    await loanShark.enableTokenForLending(1, periodInSecs, deposit, {from: lender});
+    await loanShark.enableTokenForLending(2, periodInSecs, deposit, {from: lender});
+    await loanShark.enableTokenForLending(3, periodInSecs, deposit, {from: lender});
 
     // Next three tokens are minted to but not put on loan so we can defo that flow
 

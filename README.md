@@ -23,6 +23,14 @@ Payments are streamed so the bonus if if you slay the boss quickly you can retur
  * ERC20 payment token
  * Web3 enabled dApp
  
+ ## Use cases
+ 
+  * Short-term in-game asset leasing
+  * Safe leasing of crypto-art
+  * Leasing property in meta-verses
+  * Crypto-kittie leasing for breeding
+  * Any NFT that has utility and other may want to leverage it value for a period of time...
+ 
   
 
 
