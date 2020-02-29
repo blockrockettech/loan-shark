@@ -12,10 +12,12 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(MockDAI);
     const mockDAI = await MockDAI.deployed();
 
+    const deposit = "2999999999999998944000"; // almost 3,000, but not quite
+
     // Give the first 3 accounts 10k in fake DAI
-    await mockDAI.mint(accounts[0], '10000000000000000000000');
-    await mockDAI.mint(accounts[1], '10000000000000000000000');
-    await mockDAI.mint(accounts[2], '10000000000000000000000');
+    await mockDAI.mint(accounts[0], deposit);
+    await mockDAI.mint(accounts[1], deposit);
+    await mockDAI.mint(accounts[2], deposit);
 
     // Deploy Sablier
     await deployer.deploy(Sablier);
@@ -39,13 +41,14 @@ module.exports = async function (deployer, network, accounts) {
     // Enable approval for all for the loan shark address
     await simpleNft.setApprovalForAll(loanShark.address, true);
 
-    const start = Math.round(new Date().getTime() / 1000);
-    const end = Math.round(start + 3600);
+    const now = Math.round(new Date().getTime() / 1000); // get seconds since unix epoch
+    const startTime = now + 3600; // 1 hour from now
+    const stopTime = now + 2592000 + 3600; // 30 days and 1 hour from now
 
     // first three tokens are put for loan
-    await loanShark.enableTokenForLending(1, start, end, 10000000, {from: lender});
-    await loanShark.enableTokenForLending(2, start, end, 10000000, {from: lender});
-    await loanShark.enableTokenForLending(3, start, end, 10000000, {from: lender});
+    await loanShark.enableTokenForLending(1, startTime, stopTime, deposit, {from: lender});
+    await loanShark.enableTokenForLending(2, startTime, stopTime, deposit, {from: lender});
+    await loanShark.enableTokenForLending(3, startTime, stopTime, deposit, {from: lender});
 
     // Next three tokens are minted to but not put on loan so we can defo that flow
 
@@ -72,5 +75,10 @@ module.exports = async function (deployer, network, accounts) {
 
     // await loanShark.borrowToken(1, {from: borrower});
     // await mockDAI.approve(loanShark.address, this.deposit, {from: bob});
+
+    // set up one borrow
+    mockDAI.approve(loanShark.address, deposit, {from: borrower});
+
+    await loanShark.borrowToken(1, {from: borrower});
 
 };
