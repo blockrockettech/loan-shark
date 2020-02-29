@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/access/roles/WhitelistedRole.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Full.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "./IERC1620.sol";
 
 contract LoanShark is ERC721Full, WhitelistedRole {
 
@@ -16,17 +17,24 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // state flags
         bool isEscrowed;
         bool isBorrowed;
+        //
+        //        // payment terms
+        //        uint256 costPerMinute;
+        //        uint256 maxMinutesAvailableForHire;
 
-        // payment terms
-        uint256 costPerMinute;
-        uint256 maxMinutesAvailableForHire;
+        uint256 start;
+        uint256 end;
+        uint256 depositInWei;
     }
 
     // What to stream the payment in
-    //    IERC20 public paymentToken;
+    IERC20 public paymentToken;
 
     // The original NFT contract
     IERC721Full public tokenContract;
+
+    // Sablier stream for payments
+    IERC1620 stream;
 
     mapping(uint256 => Loan) public tokensAvailableToLoan;
 
@@ -35,22 +43,23 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     mapping(uint256 => uint256) public indexToTokenId;
 
     constructor(
-        IERC721Full _tokenContract // How to make this generic to not accept a token at construction
-    //        IERC20 _paymentToken // DAI ... or even zkDAI ?
+        IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
+        IERC20 _paymentToken, // DAI ... or even zkDAI ?
+        IERC1620 _stream
     ) ERC721Full("LoanShark", "LSK🦈") public {
         super.addWhitelisted(msg.sender);
 
-        //        paymentToken = _paymentToken;
+        paymentToken = _paymentToken;
         tokenContract = _tokenContract;
+        stream = _stream;
     }
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
 
-    function enableTokenForLending(uint256 _tokenId, uint256 _costPerMinute, uint256 _maxMinutesAvailableForHire) public returns (bool) {
+    function enableTokenForLending(uint256 _tokenId, uint256 _start, uint256 _end, uint256 _depositInWei) public returns (bool) {
 
         // Validate input
-        require(_costPerMinute > 0, "Cannot loan the token for free");
-        require(_maxMinutesAvailableForHire > 0, "Cannot lend a token for less than 1 minute");
+        //        require(_costPerMinute > 0, "Cannot loan the token for free");
         require(tokensAvailableToLoan[_tokenId].tokenId == 0, "Token already placed for sale");
 
         // Validate caller owns it
@@ -65,8 +74,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
             isEscrowed : true,
             isBorrowed : false,
 
-            costPerMinute : _costPerMinute,
-            maxMinutesAvailableForHire : _maxMinutesAvailableForHire
+            start : _start,
+            end : _end,
+
+            depositInWei : _depositInWei
             });
 
         // Escrow NFT into the Loan Shark Contract
@@ -103,7 +114,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return true;
     }
 
-    function borrowToken(uint256 _tokenId, uint256 _totalCommitment) public returns (bool) {
+    function borrowToken(uint256 _tokenId) public returns (bool) {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
         Loan storage loan = tokensAvailableToLoan[_tokenId];
@@ -115,7 +126,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = msg.sender;
         loan.isBorrowed = true;
 
-        // TODO start the stream .... ?
+        // TODO
+        // transfer token here in escrow to set up stream
+
+        stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
         return true;
     }
@@ -155,8 +169,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         address borrower,
         bool isEscrowed,
         bool isBorrowed,
-        uint256 costPerMinute,
-        uint256 maxMinutesAvailableForHire,
+        uint256 start,
+        uint256 end,
         string memory tokenUri
     ) {
         Loan memory loan = tokensAvailableToLoan[_tokenId];
@@ -165,8 +179,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower,
         loan.isEscrowed,
         loan.isBorrowed,
-        loan.costPerMinute,
-        loan.maxMinutesAvailableForHire,
+        loan.start,
+        loan.end,
         tokenURI(_tokenId)
         );
     }
