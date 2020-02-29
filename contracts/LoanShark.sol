@@ -72,7 +72,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         tokensAvailableToLoan[_tokenId] = Loan({
             tokenId : _tokenId,
             lender : msg.sender,
-            borrower : address(this),
+            borrower : address(0x0),
 
             isEscrowed : true,
             isBorrowed : false,
