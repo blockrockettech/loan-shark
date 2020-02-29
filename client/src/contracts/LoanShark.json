@@ -20601,12 +20601,12 @@
         }
       },
       "links": {},
-      "address": "0xf9A29482c1Ea2DE777a9786B836DD79c35dd6102",
-      "transactionHash": "0x7306759c3f54bd24a63c82c4e8a299eef60053f419cfd546ec0a4b923841bfeb"
+      "address": "0x341B85CAA58f4bC8ccEB3cBDa108d1B806083794",
+      "transactionHash": "0xdeb9b91b82ab60e9fb4000d6e99548645d54353cd34d5d60cfaeb25a76a2a593"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T10:49:39.517Z",
+  "updatedAt": "2020-02-29T11:45:47.524Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
