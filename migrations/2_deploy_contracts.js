@@ -12,13 +12,15 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(MockDAI);
     const mockDAI = await MockDAI.deployed();
 
+    const lender = accounts[0];
+    const borrower = accounts[0];
+
     const lotsOfCash = "10000000000000000000000000"; // lots of dollar!
     const deposit =    "2999999999999998944000"; // almost 3,000, but not quite
 
     // Give the first 3 accounts 10k in fake DAI
     await mockDAI.mint(accounts[0], lotsOfCash);
-    await mockDAI.mint(accounts[1], lotsOfCash);
-    await mockDAI.mint(accounts[2], lotsOfCash);
+    await mockDAI.mint(accounts[0], lotsOfCash);
 
     // Deploy Sablier
     await deployer.deploy(Sablier);
@@ -28,9 +30,6 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(LoanShark, simpleNft.address, DAI, sablier.address);
 
     const loanShark = await LoanShark.deployed();
-
-    const lender = accounts[0];
-    const borrower = accounts[0];
 
     // KO
     await simpleNft.mintWithTokenURI(lender, 1, 'https://ipfs.infura.io/ipfs/QmX4HaxFopmnyaxXLXwAUvFJqC5AyTnYiMqkZ2RWK2tt5S', {from: lender});
@@ -59,20 +58,6 @@ module.exports = async function (deployer, network, accounts) {
     await simpleNft.mintWithTokenURI(lender, 5, 'https://us-central1-block-cities.cloudfunctions.net/api/network/1/token/2066', {from: lender});
     // Axie infinity
     await simpleNft.mintWithTokenURI(lender, 6, 'https://axieinfinity.com/api/axies/14514', {from: lender});
-
-    // // Print out all tokens which have been put up for loan
-    // const totalTokens = await loanShark.totalTokens();
-    // // console.log('Total tokens', totalTokens);
-    //
-    // for (let i = 0; i < totalTokens; i++) {
-    //     const tokenId = await loanShark.getTokenIdForIndex(i);
-    //
-    //     // console.log('Token ID', tokenId, i);
-    //     const loanDetails = await loanShark.getLoanDetails(tokenId);
-    //
-    //     const {tokenUri} = loanDetails;
-    //     // make http call - load tokenUri
-    // }
 
     // set up one borrow
     mockDAI.approve(loanShark.address, lotsOfCash, {from: borrower});

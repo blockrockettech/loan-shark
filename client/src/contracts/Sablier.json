@@ -21372,12 +21372,12 @@
         }
       },
       "links": {},
-      "address": "0x6A4EcdeaFA185b0b672e9A35e35B4AFf733c5959",
-      "transactionHash": "0x0348c453dadfcad7fdf5b6627b4bbb0d3f7153ffb76d66b7f3f5d35ca3d9c70e"
+      "address": "0xF6db17228226465c99FE09fe36d5e5Bee438be3F",
+      "transactionHash": "0x2248bbeb4c14edf36459c8ad7d7fe2dc8f76f95e847d152f1c1c5aa54147d939"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T20:48:10.819Z",
+  "updatedAt": "2020-02-29T21:18:56.229Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Sablier",
