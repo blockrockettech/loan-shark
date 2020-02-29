@@ -24,7 +24,7 @@ const styles = {
     margin: '40px 0',
   },
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#648c8b',
     display: 'flex',
     justifyContent: 'center',
     borderRadius: 6,
@@ -164,19 +164,11 @@ class MyNFTs extends Component {
           <span>Other NFTs</span>
         </div>
         <div className={classes.card}>
-          {this.state.showLendingToggle? (
-            <div className={classes.subtitle}>
-              <div>
-                {this.buildMyNftCards()}
-              </div>
-            </div>
-            ) : (
-            <div className={classes.subtitle}>
-              <div>
-                {this.buildCardsForSale()}
-              </div>
-            </div>
-          )}
+          {this.state.showLendingToggle? 
+              this.buildMyNftCards()
+            : 
+              this.buildCardsForSale()
+          }
         </div>
       </div>
     )
