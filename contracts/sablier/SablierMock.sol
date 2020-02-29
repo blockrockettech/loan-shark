@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity 0.5.14;
 
 //import "@sablier/protocol/contracts/Sablier.sol";
 import "./IERC1620.sol";
