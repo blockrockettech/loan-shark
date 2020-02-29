@@ -77,11 +77,12 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
 
             await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
 
-            await time.increaseTo(startTime.add(new BN('3602')));
+            for (let i = 0; i < 1000; i++) {
+                await time.increaseTo(startTime.add(new BN(i.toString()))));
 
-            const bal = await this.loanShark.getRemainingStreamBalance.call(TOKEN_ID_ONE, bob, {from: bob});
-
-            console.log(bal.toString());
+                let bal = await this.loanShark.getRemainingStreamBalance.call(TOKEN_ID_ONE, bob, {from: bob});
+                console.log(web3.utils.fromWei(bal.toString()));
+            }
         });
     });
 });
