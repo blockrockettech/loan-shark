@@ -13,6 +13,8 @@ const styles = {
   root: {
     maxWidth: 345,
     maxHeight: 500,
+    margin: 20,
+    minWidth: 256,
   },
   media: {
     height: 140,
