@@ -37,9 +37,15 @@ const NftCard = props =>  {
         </CardContent>
       </CardActionArea>
       <CardActions>
-
+        <div>Set Terms</div>
         <Button size="small" color="primary">
-          Set Terms
+          $500 for 1 Day
+        </Button>
+        <Button size="small" color="primary">
+          $60 for 1hr
+        </Button>
+        <Button size="small" color="primary">
+          $10 for 10min
         </Button>
       </CardActions>
     </Card>
