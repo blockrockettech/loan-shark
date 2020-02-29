@@ -58,4 +58,7 @@ interface IERC1620 {
     function withdrawFromStream(uint256 streamId, uint256 funds) external returns (bool);
 
     function cancelStream(uint256 streamId) external returns (bool);
+
+    // expose sneaky extra function... THIS IS NOT PART OF https://eips.ethereum.org/EIPS/eip-1620
+    function deltaOf(uint256 streamId) external view returns (uint256 delta);
 }

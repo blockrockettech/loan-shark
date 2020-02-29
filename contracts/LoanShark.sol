@@ -196,8 +196,15 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     }
 
     function getRemainingTimeLeftForLoan(uint _tokenId) public returns (uint256) {
-        // TODO
-        return 0;
+        uint256 streamId = tokenIdToStreamId[_tokenId];
+        require(streamId > 0, "Must have a stream");
+
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+
+        if (block.timestamp <= loan.start) return loan.end - loan.start;
+        if (block.timestamp > loan.end) return 0;
+
+        return loan.end - stream.deltaOf(streamId);
     }
 
     function getRemainingStreamBalance(uint _tokenId) public returns (uint256) {

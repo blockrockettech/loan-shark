@@ -82,7 +82,8 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
                 await time.increaseTo(this.startTime.add(new BN(i.toString())));
 
                 let bal = await this.loanShark.getRemainingStreamBalance.call(TOKEN_ID_ONE, {from: alice});
-                console.log(web3.utils.fromWei(bal.toString()));
+                let delta = await this.loanShark.getRemainingTimeLeftForLoan.call(TOKEN_ID_ONE, {from: alice});
+                console.log(`remaining ${delta.toString()} >> ${web3.utils.fromWei(bal.toString())}`);
             }
         });
 
