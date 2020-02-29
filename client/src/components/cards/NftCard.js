@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button';
-import CardActions from '@material-ui/core/CardActions';
 
 const styles = {
   root: {
@@ -17,9 +16,6 @@ const styles = {
     borderRadius: 6,
     backgroundColor: '#FFFFFF',
     boxShadow: '3px 3px 5px 6px #ccc',
-  },
-  media: {
-    height: 140,
   },
   imageContainer: {
     minHeight: 100,
@@ -41,7 +37,7 @@ const styles = {
     outline: 'none',
     border: 'none',
     borderRadius: 3,
-    height: 50,
+    height: 34,
     width: 100,
     color: '#FFFFFF',
     cursor: 'pointer',
@@ -50,37 +46,90 @@ const styles = {
       color: '#000080'
     }
   },
+  submitButton: {
+    backgroundColor: '#b52114',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'lo',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 100,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#69120b',
+    }
+  },
 }
 
-const NftCard = props =>  {
-  const { classes, item = {} } = props
+class NftCard extends Component {
 
-  return (
-      <div className={classes.root}>
-        <div className={classes.imageContainer}>
-          <img src={item.image} className={classes.image} />
-        </div>
-        <div className={classes.textGroup}>
-          <CardContent>
-            <div className={classes.cardTitle}>
-              {item.name}
-            </div>
-          </CardContent>
+  state = {
+    showShareForm: false
+  }
 
-          <CardActions>
-            <Button className={classes.borrowButton}>
-              $500 x 1 Day
-            </Button>
-            <Button className={classes.borrowButton}>
-              $60 x 1hr
-            </Button>
-            <Button className={classes.borrowButton}>
-              $10 x 10min
-            </Button>
-          </CardActions>
+  submitForm = event => {
+    event.preventDefault()
+  }
+
+  showShareForm = () => {
+    this.setState({
+      showShareForm: true
+    })
+  }
+
+  hideShareForm = () => {
+    this.setState({
+      showShareForm: false
+    })
+  }
+
+  render() {
+    const { classes, item = {} } = this.props
+
+    return (
+        <div className={classes.root}>
+          {this.state.showShareForm ? (
+            <>
+              <CardContent>
+                <div>Share your NFT by completing the details below</div>
+                <form>
+                  <label>Total price in DAI</label><input />
+                  <label>Maximum loan duration in seconds</label><input />
+                </form>
+              </CardContent>
+              <CardActions>
+                <button className={classes.submitButton} onClick={event => this.submitForm(event)}>
+                  Submit
+                </button>
+              </CardActions>
+            </>) : (
+            <>
+              <div className={classes.imageContainer}>
+                <img src={item.image} className={classes.image} />
+              </div>
+              <div className={classes.textGroup}>
+                <CardContent>
+                  <div className={classes.cardTitle}>
+                    {item.name}
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <button className={classes.borrowButton} onClick={this.showShareForm}>
+                    Share
+                  </button>
+                  <button className={classes.borrowButton} onClick={this.hideShareForm}>
+                    Cancel
+                </button>
+                </CardActions>
+              </div>
+            </>
+            )}
         </div>
-      </div>
-  )
+    )
+  }
 }
 
 export default withStyles(styles)(NftCard)
