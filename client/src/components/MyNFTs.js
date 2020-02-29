@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Switch from '@material-ui/core/Switch'
 import Web3 from 'web3'
 import Onboard from 'bnc-onboard';
-import NftCard from './NftCard';
-import ForLoanNftCard from './ForLoanNftCard';
+import NftCard from './cards/NftCard';
+import ForLoanNftCard from './cards/ForLoanNftCard';
 
 const SimpleNft = require('../contracts/SimpleNft.json')
 const LoanShark = require('../contracts/LoanShark.json')
@@ -155,25 +155,23 @@ class MyNFTs extends Component {
     return (
       <div className={classes.myNFTs}>
         <div className={classes.toggle}>
-          <span>Borrowing</span>
+          <span>NFTs For Loan</span>
           <ToggleSwitch
             checked={this.state.showLendingToggle}
             onChange={this.handleChange}
             value="checked"
           />
-          <span>Lending</span>
+          <span>Other NFTs</span>
         </div>
         <div className={classes.card}>
           {this.state.showLendingToggle? (
             <div className={classes.subtitle}>
-              Lending
               <div>
                 {this.buildCardsForSale()}
               </div>
             </div>
             ) : (
             <div className={classes.subtitle}>
-              Borrowing
               <div>
                 {this.buildNftCards()}
               </div>

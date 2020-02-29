@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import ForLoanNftCard from './ForLoanNftCard'
+import ForLoanNftCard from './cards/ForLoanNftCard'
 
 const testNFT = require('../testNFT.json')
 
