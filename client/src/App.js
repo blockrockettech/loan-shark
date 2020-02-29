@@ -12,6 +12,10 @@ import Header from './components/Header'
 import Marketplace from './components/Marketplace'
 import MyNFTs from './components/MyNFTs'
 
+const axios = require('axios')
+
+const LoanShark = require('./contracts/LoanShark.json')
+
 let web3
 
 const styles = {
@@ -33,7 +37,7 @@ const styles = {
 
 const onboard = Onboard({
   dappId: '09a2db78-5c6a-4dad-b5f7-218b278d0e55', // [String] The API key created by step one above
-  networkId: 3, // [Integer] The Ethereum network ID your Dapp uses.
+  networkId: 5777, // [Integer] The Ethereum network ID your Dapp uses.
   subscriptions: {
     wallet: wallet => {
        web3 = new Web3(wallet.provider)
@@ -42,7 +46,12 @@ const onboard = Onboard({
 })
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null }
+  state = { 
+    web3: null, 
+    accounts: null, 
+    contract: null,
+    nftsForSale: [], 
+  }
 
   componentDidMount = async () => {
     try {
@@ -50,44 +59,48 @@ class App extends Component {
       await onboard.walletSelect()
       await onboard.walletCheck()
 
-      // Use web3 to get the user's accounts.
-      // const accounts = await web3.eth.getAccounts()
-
-      // Get the contract instance.
-      // const networkId = await web3.eth.net.getId()
-      // const deployedNetwork = SimpleStorageContract.networks[networkId];
-      // const instance = new web3.eth.Contract(
-      //   SimpleStorageContract.abi,
-      //   deployedNetwork && deployedNetwork.address,
-      // );
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3 })
+      const networkId = await web3.eth.net.getId()
+      const deployedNetwork = LoanShark.networks[networkId]
+      const instance = new web3.eth.Contract(
+        LoanShark.abi,
+        deployedNetwork && deployedNetwork.address,
+      )
+      this.setState({ web3, contract: instance })
+      this.getNFTsForSale()
     } catch (error) {
-      // Catch any errors for any of the above operations.
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
+      )
       console.error(error)
     }
   };
 
-  // runExample = async () => {
-  //   const { accounts, contract } = this.state;
+  getNFTsForSale = async() => {
+    const { contract } = this.state
+    const totalTokens = await contract.methods.totalTokens().call()
+    const nftsForSale = []
 
-  //   // Stores a given value, 5 by default.
-  //   await contract.methods.set(5).send({ from: accounts[0] });
-
-  //   // Get the value from the contract to prove it worked.
-  //   const response = await contract.methods.get().call();
-
-  //   // Update state with the result.
-  //   this.setState({ storageValue: response });
-  // };
+    for (let i = 0; i < totalTokens; i++) {
+      const tokenId = await contract.methods.getTokenIdForIndex(i).call()
+      console.log(tokenId)
+      const loanDetails = await contract.methods.getLoanDetails(tokenId).call()
+      const tokenUri = await contract.methods.getPrincipleTokenUri(tokenId).call()
+      const { data } = await axios.get(tokenUri)
+      const nft = {
+        ...data,
+        ...loanDetails
+      }
+      nftsForSale.push(nft)
+    }
+    this.setState({
+      ...this.state,
+      nftsForSale
+    })
+  }
 
   render() {
     const { classes } = this.props
+    console.log(this.state.nftsForSale)
 
     if (!this.state.web3) {
       return <div className={classes.app}><div className={classes.failMessage}>Please connect your Wallet to continue to Loan Shark</div></div>;
@@ -101,10 +114,16 @@ class App extends Component {
               <MyNFTs />
             </div>
           </Route>
-          <Route exact path="/marketplace">
+          <Route exact path="/borrow">
             <div className={classes.app}>
               <Header />
               <Marketplace />
+            </div>
+          </Route>
+          <Route exact path="/loan">
+            <div className={classes.app}>
+              <Header />
+              Loan your NFTs!
             </div>
           </Route>
           <Route exact path="/about">
@@ -118,7 +137,7 @@ class App extends Component {
               <Header />
               <ul>
                 <li className={classes.listItem}>Loan Shark enables you to borrow and loan NFTs</li>
-                <li className={classes.listItem}>ERC20-compliant wrapped NFT mechanism enables token streaming via Sablier</li>
+                <li className={classes.listItem}>ERC-721 compliant “wrapped NFT” which can be leased by owner via Sablier</li>
               </ul>
             </div>
           </Route>
@@ -129,3 +148,4 @@ class App extends Component {
 }
 
 export default withStyles(styles)(App)
+

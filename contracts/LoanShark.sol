@@ -174,8 +174,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         bool isEscrowed,
         bool isBorrowed,
         uint256 start,
-        uint256 end,
-        string memory tokenUri
+        uint256 end
     ) {
         Loan memory loan = tokensAvailableToLoan[_tokenId];
         return (
@@ -184,8 +183,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.isEscrowed,
         loan.isBorrowed,
         loan.start,
-        loan.end,
-        tokenURI(_tokenId)
+        loan.end
         );
     }
 
@@ -240,6 +238,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
             return tokenContract.tokenURI(_tokenId);
         }
         return "TODO return static IPFS hash";
+    }
+
+    function getPrincipleTokenUri(uint256 _tokenId) public view returns (string memory) {
+        return tokenContract.tokenURI(_tokenId);
     }
 
     ////////////////////////////////
