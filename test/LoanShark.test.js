@@ -77,8 +77,9 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
 
             await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
 
-            for (let i = 0; i < 1000; i++) {
-                await time.increaseTo(startTime.add(new BN(i.toString()))));
+            // two mins
+            for (let i = 0; i < 120; i++) {
+                await time.increaseTo(startTime.add(new BN(i.toString())));
 
                 let bal = await this.loanShark.getRemainingStreamBalance.call(TOKEN_ID_ONE, bob, {from: bob});
                 console.log(web3.utils.fromWei(bal.toString()));
