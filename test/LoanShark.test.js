@@ -90,57 +90,55 @@ contract("LoanShark tests", function ([creator, alice, bob, ...accounts]) {
     });
 
     describe('Lender withdrawal functions', function () {
-            it("assert can lender withdraw funds from the stream", async function () {
+        it("assert can lender withdraw funds from the stream", async function () {
 
-                let originalDaiBalance = await this.mockDai.balanceOf(alice);
+            let originalDaiBalance = await this.mockDai.balanceOf(alice);
 
-                await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
-                (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
+            (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
 
-                // allow the shark to escrow
-                this.mockDai.approve(this.loanShark.address, this.deposit, {from: bob});
+            // allow the shark to escrow
+            this.mockDai.approve(this.loanShark.address, this.deposit, {from: bob});
 
-                await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
+            await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
 
-                // 1 min
-                await time.increaseTo(this.startTime.add(new BN(3600)));
+            // 1 min
+            await time.increaseTo(this.startTime.add(new BN(3600)));
 
-                await this.loanShark.withdraw(TOKEN_ID_ONE, {from:alice});
+            await this.loanShark.withdraw(TOKEN_ID_ONE, {from: alice});
 
-                let newDaiBalance = await this.mockDai.balanceOf(alice);
-                console.log(`Lender Dai balance delta: ${web3.utils.fromWei(originalDaiBalance.toString())} => ${web3.utils.fromWei(newDaiBalance.toString())}`);
+            let newDaiBalance = await this.mockDai.balanceOf(alice);
+            console.log(`Lender Dai balance delta: ${web3.utils.fromWei(originalDaiBalance.toString())} => ${web3.utils.fromWei(newDaiBalance.toString())}`);
 
-                expect(newDaiBalance > originalDaiBalance);
-            });
-
-            it("assert lender can cancel the stream before contract end", async function () {
-
-                let originalAliceDaiBalance = await this.mockDai.balanceOf(alice);
-                let originalBobDaiBalance = await this.mockDai.balanceOf(bob);
-
-                await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
-                (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
-
-                // allow the shark to escrow
-                this.mockDai.approve(this.loanShark.address, this.deposit, {from: bob});
-
-                await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
-
-                // 1 min
-                await time.increaseTo(this.startTime.add(new BN(3600)));
-
-                await this.loanShark.cancel(TOKEN_ID_ONE, {from: alice});
-
-                let newAliceDaiBalance = await this.mockDai.balanceOf(alice);
-                let newBobDaiBalance = await this.mockDai.balanceOf(bob);
-
-                console.log(`Alice Dai balance delta: ${web3.utils.fromWei(originalAliceDaiBalance.toString())} => ${web3.utils.fromWei(newAliceDaiBalance.toString())}`);
-                console.log(`Bob Dai balance delta: ${web3.utils.fromWei(originalBobDaiBalance.toString())} => ${web3.utils.fromWei(newBobDaiBalance.toString())}`);
-                assert (newBobDaiBalance < originalBobDaiBalance);
-                assert (newAliceDaiBalance > originalAliceDaiBalance);
-                assert (originalBobDaiBalance - newBobDaiBalance) > 2995;
-            });
+            expect(newDaiBalance > originalDaiBalance);
         });
 
+        it("assert lender can cancel the stream before contract end", async function () {
 
+            let originalAliceDaiBalance = await this.mockDai.balanceOf(alice);
+            let originalBobDaiBalance = await this.mockDai.balanceOf(bob);
+
+            await this.loanShark.enableTokenForLending(TOKEN_ID_ONE, this.startTime, this.stopTime, this.deposit, {from: alice});
+            (await this.loanShark.totalTokens()).should.be.bignumber.equal('1');
+
+            // allow the shark to escrow
+            this.mockDai.approve(this.loanShark.address, this.deposit, {from: bob});
+
+            await this.loanShark.borrowToken(TOKEN_ID_ONE, {from: bob});
+
+            // 1 min
+            await time.increaseTo(this.startTime.add(new BN(3600)));
+
+            await this.loanShark.cancel(TOKEN_ID_ONE, {from: alice});
+
+            let newAliceDaiBalance = await this.mockDai.balanceOf(alice);
+            let newBobDaiBalance = await this.mockDai.balanceOf(bob);
+
+            console.log(`Alice Dai balance delta: ${web3.utils.fromWei(originalAliceDaiBalance.toString())} => ${web3.utils.fromWei(newAliceDaiBalance.toString())}`);
+            console.log(`Bob Dai balance delta: ${web3.utils.fromWei(originalBobDaiBalance.toString())} => ${web3.utils.fromWei(newBobDaiBalance.toString())}`);
+            assert(newBobDaiBalance < originalBobDaiBalance);
+            assert(newAliceDaiBalance > originalAliceDaiBalance);
+            assert(originalBobDaiBalance - newBobDaiBalance > 2995);
+        });
+    });
 });
