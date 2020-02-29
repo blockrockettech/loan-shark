@@ -39,7 +39,8 @@ const Header = props => {
       </div>
       <div className={classes.logo}><img src="/Loansharklogo.png" alt="logo" /></div>
       <div className={classes.menu}>
-        <Link className={classes.link} to="/marketplace">Marketplace</Link>
+        <Link className={classes.link} to="/borrow">Borrow</Link>
+        <Link className={classes.link} to="/loan">Loan</Link>
         <Link className={classes.link} to="/user">My NFTs</Link>
         <Link className={classes.link} to="/about">About</Link>
         <a className={classes.link} href="https://github.com/blockrockettech/loan-shark">Code</a>

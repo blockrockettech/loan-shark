@@ -30,7 +30,6 @@ class Marketplace extends Component {
 
   render() {
     const { classes } = this.props
-    console.log(this.state.NFTs)
 
     return (
       <div className={classes.marketplace}>
@@ -41,3 +40,4 @@ class Marketplace extends Component {
 }
 
 export default withStyles(styles)(Marketplace)
+
