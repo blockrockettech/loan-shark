@@ -22,7 +22,12 @@ const styles = {
 }
 
 const ForLoanNftCard = props =>  {
-  const { classes, item = {} } = props
+  const {
+    classes,
+    item = {} ,
+    onBorrowClicked = (item) => {},
+    onClawbackClicked = (item) => {},
+  } = props
 
   return (
     <Card className={classes.root}>
@@ -44,10 +49,10 @@ const ForLoanNftCard = props =>  {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => onBorrowClicked(item)}>
           Borrow
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => onClawbackClicked(item)}>
           Clawback
         </Button>
       </CardActions>

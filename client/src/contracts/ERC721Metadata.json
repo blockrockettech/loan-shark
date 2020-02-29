@@ -4634,8 +4634,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-29T15:26:03.073Z",
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2020-02-29T16:17:14.441Z",
   "devdoc": {
     "methods": {
       "approve(address,uint256)": {

@@ -3063,8 +3063,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-29T15:26:02.969Z",
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2020-02-29T16:17:14.411Z",
   "devdoc": {
     "details": "Contract module which provides a basic access control mechanism, where there is an account (an owner) that can be granted exclusive access to specific functions. * This module is used through inheritance. It will make available the modifier `onlyOwner`, which can be applied to your functions to restrict their use to the owner.",
     "methods": {

@@ -1,15 +1,15 @@
 {
   "contractName": "CarefulMath",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.14+commit.01f1aaa4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"Compound\",\"methods\":{},\"title\":\"Careful Math\"},\"userdoc\":{\"methods\":{},\"notice\":\"Derived from OpenZeppelin's SafeMath library        https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol\"}},\"settings\":{\"compilationTarget\":{\"/Users/hollyatkinson/Development/code/loan-shark/contracts/sablier/compound/CarefulMath.sol\":\"CarefulMath\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/hollyatkinson/Development/code/loan-shark/contracts/sablier/compound/CarefulMath.sol\":{\"keccak256\":\"0xb359038f4bdf9a52a73de408e64c185f2eb744d4e8d58913390d1536c69f47e2\",\"urls\":[\"bzz-raw://07057b66000b36a5d3d7373585e655117c806ffa6f2c55a292ad6589df5ec177\",\"dweb:/ipfs/Qmf4gtKcYHeKSriTHhcbwtPZHCTEtQKVSPMzAAdg4YmoLH\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820d152367ee5c7d51a37573afcad7cb36d359b77c0a2d855f85a9fdc8013f07c5064736f6c634300050e0032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820d152367ee5c7d51a37573afcad7cb36d359b77c0a2d855f85a9fdc8013f07c5064736f6c634300050e0032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.14+commit.01f1aaa4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"Compound\",\"methods\":{},\"title\":\"Careful Math\"},\"userdoc\":{\"methods\":{},\"notice\":\"Derived from OpenZeppelin's SafeMath library        https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol\"}},\"settings\":{\"compilationTarget\":{\"/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/compound/CarefulMath.sol\":\"CarefulMath\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/compound/CarefulMath.sol\":{\"keccak256\":\"0xb359038f4bdf9a52a73de408e64c185f2eb744d4e8d58913390d1536c69f47e2\",\"urls\":[\"bzz-raw://07057b66000b36a5d3d7373585e655117c806ffa6f2c55a292ad6589df5ec177\",\"dweb:/ipfs/Qmf4gtKcYHeKSriTHhcbwtPZHCTEtQKVSPMzAAdg4YmoLH\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a7231582069bc18755dc8253845fde7d9984518c7acf7e20810637850f279cec54377069264736f6c634300050e0032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7231582069bc18755dc8253845fde7d9984518c7acf7e20810637850f279cec54377069264736f6c634300050e0032",
   "sourceMap": "238:1979:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:1979:7;;;;;;;",
   "deployedSourceMap": "238:1979:7:-;;;;;",
   "source": "pragma solidity 0.5.14;\n\n\n/**\n * @title Careful Math\n * @author Compound\n * @notice Derived from OpenZeppelin's SafeMath library\n *         https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol\n */\ncontract CarefulMath {\n    /**\n     * @dev Possible error codes that we can return\n     */\n    enum MathError { NO_ERROR, DIVISION_BY_ZERO, INTEGER_OVERFLOW, INTEGER_UNDERFLOW }\n\n    /**\n     * @dev Multiplies two numbers, returns an error on overflow.\n     */\n    function mulUInt(uint256 a, uint256 b) internal pure returns (MathError, uint256) {\n        if (a == 0) {\n            return (MathError.NO_ERROR, 0);\n        }\n\n        uint256 c = a * b;\n\n        if (c / a != b) {\n            return (MathError.INTEGER_OVERFLOW, 0);\n        } else {\n            return (MathError.NO_ERROR, c);\n        }\n    }\n\n    /**\n     * @dev Integer division of two numbers, truncating the quotient.\n     */\n    function divUInt(uint256 a, uint256 b) internal pure returns (MathError, uint256) {\n        if (b == 0) {\n            return (MathError.DIVISION_BY_ZERO, 0);\n        }\n\n        return (MathError.NO_ERROR, a / b);\n    }\n\n    /**\n     * @dev Subtracts two numbers, returns an error on overflow (i.e. if subtrahend is greater than minuend).\n     */\n    function subUInt(uint256 a, uint256 b) internal pure returns (MathError, uint256) {\n        if (b <= a) {\n            return (MathError.NO_ERROR, a - b);\n        } else {\n            return (MathError.INTEGER_UNDERFLOW, 0);\n        }\n    }\n\n    /**\n     * @dev Adds two numbers, returns an error on overflow.\n     */\n    function addUInt(uint256 a, uint256 b) internal pure returns (MathError, uint256) {\n        uint256 c = a + b;\n\n        if (c >= a) {\n            return (MathError.NO_ERROR, c);\n        } else {\n            return (MathError.INTEGER_OVERFLOW, 0);\n        }\n    }\n\n    /**\n     * @dev add a and b and then subtract c\n     */\n    function addThenSubUInt(uint256 a, uint256 b, uint256 c) internal pure returns (MathError, uint256) {\n        (MathError err0, uint256 sum) = addUInt(a, b);\n\n        if (err0 != MathError.NO_ERROR) {\n            return (err0, 0);\n        }\n\n        return subUInt(sum, c);\n    }\n}",
-  "sourcePath": "/Users/hollyatkinson/Development/code/loan-shark/contracts/sablier/compound/CarefulMath.sol",
+  "sourcePath": "/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/compound/CarefulMath.sol",
   "ast": {
-    "absolutePath": "/Users/hollyatkinson/Development/code/loan-shark/contracts/sablier/compound/CarefulMath.sol",
+    "absolutePath": "/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/compound/CarefulMath.sol",
     "exportedSymbols": {
       "CarefulMath": [
         2143
@@ -2330,7 +2330,7 @@
     "src": "0:2217:7"
   },
   "legacyAST": {
-    "absolutePath": "/Users/hollyatkinson/Development/code/loan-shark/contracts/sablier/compound/CarefulMath.sol",
+    "absolutePath": "/Users/jamesmorgan/Dropbox/workspace-blockrocket/blockrocket/loan-shark/contracts/sablier/compound/CarefulMath.sol",
     "exportedSymbols": {
       "CarefulMath": [
         2143
@@ -4655,8 +4655,8 @@
     "version": "0.5.14+commit.01f1aaa4.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-29T15:26:02.861Z",
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2020-02-29T16:17:14.384Z",
   "devdoc": {
     "author": "Compound",
     "methods": {},
