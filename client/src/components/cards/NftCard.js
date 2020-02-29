@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
 
 const styles = {
   root: {
@@ -32,11 +34,14 @@ const NftCard = props =>  {
           <Typography gutterBottom variant="h5" component="h2">
             {item.name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {item.description}
-          </Typography>
-        </CardContent>
+        </CardContent>  
       </CardActionArea>
+      <CardActions>
+
+        <Button size="small" color="primary">
+          Set Terms
+        </Button>
+      </CardActions>
     </Card>
   )
 }
