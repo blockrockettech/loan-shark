@@ -135,8 +135,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // deposit here in escrow to set up stream
         paymentToken.transferFrom(msg.sender, address(this), loan.depositInWei);
 
+        // FIXME we need to capture length and work this out or pass in when we call the borrow method
         // this will pull the escrowed amount into the stream
-        uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
+        // uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
+        uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), now + 60, now + 2592000 + 60);
 
         tokenIdToStreamId[_tokenId] = streamId;
         return true;
@@ -154,7 +156,6 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = address(0);
         loan.isBorrowed = false;
 
-        // TODO fix this?
          stream.cancelStream(tokenIdToStreamId[_tokenId]);
 
         delete tokenIdToStreamId[_tokenId];
