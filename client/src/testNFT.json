@@ -1,0 +1,7 @@
+{
+  "name": "TESTNFT",
+  "description": "A message about the means of production and resource consumption in the context of luxury goods and GAN art.\n\nNOTE: This art was previously part of ETHDenver's 2020 Art Auction, but due to a technical issue, the original token was reclaimed and burned. The original and invalid token was burned to 0x000000000000000000000000000000000000dead in transaction https://etherscan.io/tx/0x639cd7ba345d4ecb46f08796d4c3ad19d2db00936bf22b1b847b96280ce7c4a4. This KODA token is the correct and current token for AISTARTERPACK. -obxium 2020",
+  "image": "https://ipfs.infura.io/ipfs/QmQwwtW5fB5t8y7XtLsMDoSr5ZqtjyyszCZed8W3K2gEEi/asset.png",
+  "price": "50",
+  "duration": "3600"
+}
