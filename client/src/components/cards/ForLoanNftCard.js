@@ -19,7 +19,7 @@ const styles = {
   },
 }
 
-const MediaCard = props =>  {
+const ForLoanNftCard = props =>  {
   const { classes, item = {} } = props
 
   return (
@@ -53,4 +53,4 @@ const MediaCard = props =>  {
   )
 }
 
-export default withStyles(styles)(MediaCard)
+export default withStyles(styles)(ForLoanNftCard)

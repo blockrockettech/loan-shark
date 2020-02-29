@@ -3,6 +3,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Switch from '@material-ui/core/Switch'
 import Web3 from 'web3'
 import Onboard from 'bnc-onboard';
+import NftCard from './cards/NftCard';
+import ForLoanNftCard from './cards/ForLoanNftCard';
 
 const SimpleNft = require('../contracts/SimpleNft.json')
 const LoanShark = require('../contracts/LoanShark.json')
@@ -61,10 +63,14 @@ const onboard
 
 class MyNFTs extends Component {
   state = {
+    showLendingToggle: false,
     web3: null,
     account: null,
     simpleNftContract: null,
     loanSharkContract: null,
+    tokensOfOwner: [],
+    myNfts: [],
+    nftsForSale: []
   }
 
   componentDidMount = async () => {
@@ -112,6 +118,7 @@ class MyNFTs extends Component {
       const { data } = await axios.get(tokenUri)
       return {
         ...data,
+        tokenId,
         ...loanDetails
       }
     }))
@@ -130,8 +137,16 @@ class MyNFTs extends Component {
   handleChange = () => {
     this.setState({
       ...this.state,
-      checked: !this.state.checked
+      showLendingToggle: !this.state.showLendingToggle
     })
+  }
+
+  buildNftCards = () => {
+    return this.state.myNfts.map(item => <NftCard key={item.tokenId} item={item} />)
+  }
+
+  buildCardsForSale = () => {
+    return this.state.nftsForSale.map(item => <ForLoanNftCard key={item.tokenId} item={item} />)
   }
 
   render() {
@@ -140,22 +155,26 @@ class MyNFTs extends Component {
     return (
       <div className={classes.myNFTs}>
         <div className={classes.toggle}>
-          <span>Borrowing</span>
+          <span>NFTs For Loan</span>
           <ToggleSwitch
-            checked={this.state.checked}
+            checked={this.state.showLendingToggle}
             onChange={this.handleChange}
             value="checked"
           />
-          <span>Lending</span>
+          <span>Other NFTs</span>
         </div>
         <div className={classes.card}>
-          {this.state.checked? (
+          {this.state.showLendingToggle? (
             <div className={classes.subtitle}>
-              Lending
+              <div>
+                {this.buildCardsForSale()}
+              </div>
             </div>
             ) : (
             <div className={classes.subtitle}>
-              Borrowing
+              <div>
+                {this.buildNftCards()}
+              </div>
             </div>
           )}
         </div>

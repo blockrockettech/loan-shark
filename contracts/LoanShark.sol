@@ -257,8 +257,6 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     // Overridden IERC721Metadata methods //
     ////////////////////////////////////////
 
-    // TODO proxy through to escrowed NFT
-
     function name() public view returns (string memory) {
         return tokenContract.name();
     }
@@ -272,7 +270,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         if (loan.isBorrowed) {
             return tokenContract.tokenURI(_tokenId);
         }
-        return "TODO return static IPFS hash";
+        // Static IPFS data for a loan shark NFT
+        return "https://ipfs.infura.io/ipfs/QmYA3fazKWXsiRXYDDyHxBKBi8udERjaRzjtPRNC2DKj3Z";
     }
 
     function getPrincipleTokenUri(uint256 _tokenId) public view returns (string memory) {
