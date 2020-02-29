@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity 0.5.14;
 
 import "@openzeppelin/contracts/access/roles/WhitelistedRole.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -52,6 +52,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         paymentToken = _paymentToken;
         tokenContract = _tokenContract;
         stream = _stream;
+
+        // approve the stream to pull whatever they want from LoanShark
+        paymentToken.approve(address(stream), uint(-1));
     }
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
@@ -126,9 +129,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = msg.sender;
         loan.isBorrowed = true;
 
-        // TODO
-        // transfer token here in escrow to set up stream
+        // deposit here in escrow to set up stream
+        paymentToken.transferFrom(msg.sender, address(this), loan.depositInWei);
 
+        // this will pull the escrowed amount into the stream
         stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
         return true;

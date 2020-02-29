@@ -1,7 +1,7 @@
 const LoanShark = artifacts.require('./LoanShark.sol');
 const SimpleNft = artifacts.require('./SimpleNft.sol');
 const MockDAI = artifacts.require('./MockDAI.sol');
-const SablierMock = artifacts.require('./SablierMock.sol');
+const Sablier = artifacts.require('./Sablier.sol');
 
 module.exports = async function (deployer, network, accounts) {
     // Deploy simple NFT
@@ -17,12 +17,12 @@ module.exports = async function (deployer, network, accounts) {
     await mockDAI.mint(accounts[1], '10000000000000000000000');
     await mockDAI.mint(accounts[2], '10000000000000000000000');
 
-    // Deploy fake Sablier
-    await deployer.deploy(SablierMock);
-    const sablierMock = await SablierMock.deployed();
+    // Deploy Sablier
+    await deployer.deploy(Sablier);
+    const sablier = await Sablier.deployed();
 
     const DAI = mockDAI.address;
-    await deployer.deploy(LoanShark, simpleNft.address, DAI, sablierMock.address);
+    await deployer.deploy(LoanShark, simpleNft.address, DAI, sablier.address);
 
     const loanShark = await LoanShark.deployed();
 
