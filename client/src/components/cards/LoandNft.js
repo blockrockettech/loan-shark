@@ -82,6 +82,23 @@ const styles = {
     maxHeight: 320,
     marginTop: 10,
   },
+  returnAssetButton: {
+    backgroundColor: '#e60b10',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'lo',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 280,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#bc4b50',
+      color: '#000080'
+    }
+  },
 }
 
 
@@ -97,7 +114,6 @@ const toDai = (value) => {
 
 const LoandNft = props =>  {
   const { classes, item = {}, balance = 0, } = props
-
 
   return (
     <div className={classes.root}>
@@ -121,6 +137,11 @@ const LoandNft = props =>  {
             Borrower: {shortAddress(item.borrower)}
           </div>
         </CardContent>
+        <CardActions>
+          <Button className={classes.returnAssetButton}>
+            Return Asset
+          </Button>
+        </CardActions>
       </div>
     </div>
   )

@@ -45,28 +45,12 @@ const styles = {
     border: 'none',
     borderRadius: 3,
     height: 34,
-    width: 100,
+    width: 280,
     color: '#FFFFFF',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#bca049',
       color: '#000080'
-    }
-  },
-  clawbackButton: {
-    backgroundColor: '#b52114',
-    fontSize: 12,
-    fontWeight: 600,
-    textDecoration: 'none',
-    outline: 'none',
-    border: 'none',
-    borderRadius: 3,
-    height: 34,
-    width: 100,
-    color: '#FFFFFF',
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: '#69120b',
     }
   },
   imageContainer: {
@@ -113,9 +97,6 @@ const ForLoanNftCard = props =>  {
           <button className={classes.borrowButton} onClick={() => onBorrowClicked(item)}>
             Borrow
           </button>
-          {/*<button className={classes.clawbackButton} onClick={onClawbackClicked}>*/}
-          {/*  Clawback*/}
-          {/*</button>*/}
         </CardActions>
       </div>
     </div>
