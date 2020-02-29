@@ -71,7 +71,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/borrow">
+          <Route exact path="/active">
             <div className={classes.app}>
               <Header />
               <Marketplace />
