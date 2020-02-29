@@ -15,7 +15,8 @@ module.exports = async function (deployer, network, accounts) {
     await simpleNft.mintWithTokenURI(lender, 2, 'https://ipfs.infura.io/ipfs/QmP2cwq9muuTtzTKFuBN6xRRygVdfy2p124urPn1dQ8C9w');
     await simpleNft.mintWithTokenURI(lender, 3, 'https://niftyfootball.cards/api/network/1/token/1');
 
-    await deployer.deploy(LoanShark, simpleNft.address, sablierMock.address);
+    const DAI = "0x0";
+    await deployer.deploy(LoanShark, simpleNft.address, DAI, sablierMock.address);
 
     const loanShark = await LoanShark.deployed();
 
