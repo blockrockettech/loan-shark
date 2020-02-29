@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/access/roles/WhitelistedRole.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Full.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "./IERC1620.sol";
 
 contract LoanShark is ERC721Full, WhitelistedRole {
 
@@ -28,6 +29,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     // The original NFT contract
     IERC721Full public tokenContract;
 
+    // Sablier stream for payments
+    IERC1620 stream;
+
     mapping(uint256 => Loan) public tokensAvailableToLoan;
 
     // So we can enumerate them
@@ -35,7 +39,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     constructor(
         IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
-        IERC20 _paymentToken // DAI ... or even zkDAI ?
+        IERC20 _paymentToken, // DAI ... or even zkDAI ?
+        IERC1620 _stream
     ) ERC721Full("LoanShark", "LSK🦈") public {
         super.addWhitelisted(msg.sender);
 
