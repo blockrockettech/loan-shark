@@ -93,7 +93,7 @@ const ForLoanNftCard = props =>  {
 
   return (
     <div className={classes.root}>
-      
+
       <div className={classes.imageContainer}>
         <img src={item.image} className={classes.image} />
       </div>
@@ -108,14 +108,14 @@ const ForLoanNftCard = props =>  {
             {item.description}
           </div>
         </CardContent>
-      
+
         <CardActions>
-          <button className={classes.borrowButton} onClick={onBorrowClicked}>
+          <button className={classes.borrowButton} onClick={() => onBorrowClicked(item)}>
             Borrow
           </button>
-          <button className={classes.clawbackButton} onClick={onClawbackClicked}>
-            Clawback
-          </button>
+          {/*<button className={classes.clawbackButton} onClick={onClawbackClicked}>*/}
+          {/*  Clawback*/}
+          {/*</button>*/}
         </CardActions>
       </div>
     </div>

@@ -114,7 +114,7 @@ const LoandNft = props =>  {
             To: {date(item.end)}
             <br/>
             <br/>
-            Total charged: {toDai(item.balance)}
+            Cost: {toDai(item.balance)}
             <br />
             <br />
             Lender: {shortAddress(item.lender)} <br />
