@@ -24,7 +24,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     }
 
     // What to stream the payment in
-    IERC20 public paymentToken;
+    //    IERC20 public paymentToken;
 
     // The original NFT contract
     IERC721Full public tokenContract;
@@ -39,13 +39,14 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     constructor(
         IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
-        IERC20 _paymentToken, // DAI ... or even zkDAI ?
+//        IERC20 _paymentToken, // DAI ... or even zkDAI ?
         IERC1620 _stream
     ) ERC721Full("LoanShark", "LSK🦈") public {
         super.addWhitelisted(msg.sender);
 
-        paymentToken = _paymentToken;
+        //        paymentToken = _paymentToken;
         tokenContract = _tokenContract;
+        stream = _stream;
     }
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
@@ -137,7 +138,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return true;
     }
 
-    function pullBackOverdueNft(uint256 _tokenId) public {
+    function clawBackNft(uint256 _tokenId) public {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
         // only allow after loan has expired
@@ -152,22 +153,22 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     function getLoanDetails(uint _tokenId) public view returns (
         address lender,
-        uint256 tokenId,
         address borrower,
         bool isEscrowed,
         bool isBorrowed,
         uint256 costPerMinute,
-        uint256 maxMinutesAvailableForHire
+        uint256 maxMinutesAvailableForHire,
+        string memory tokenUri
     ) {
         Loan memory loan = tokensAvailableToLoan[_tokenId];
         return (
-            loan.lender,
-            loan.tokenId,
-            loan.borrower,
-            loan.isEscrowed,
-            loan.isBorrowed,
-            loan.costPerMinute,
-            loan.maxMinutesAvailableForHire
+        loan.lender,
+        loan.borrower,
+        loan.isEscrowed,
+        loan.isBorrowed,
+        loan.costPerMinute,
+        loan.maxMinutesAvailableForHire,
+        tokenURI(_tokenId)
         );
     }
 
@@ -204,15 +205,15 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     // TODO proxy through to escrowed NFT
 
-    function name() external view returns (string memory) {
+    function name() public view returns (string memory) {
         return tokenContract.name();
     }
 
-    function symbol() external view returns (string memory) {
+    function symbol() public view returns (string memory) {
         return tokenContract.symbol();
     }
 
-    function tokenURI(uint256 _tokenId) external view returns (string memory) {
+    function tokenURI(uint256 _tokenId) public view returns (string memory) {
         Loan memory loan = tokensAvailableToLoan[_tokenId];
         if (loan.isBorrowed) {
             return tokenContract.tokenURI(_tokenId);
