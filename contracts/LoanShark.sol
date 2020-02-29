@@ -195,6 +195,21 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         );
     }
 
+    function cancel(uint _tokenId) public returns (bool) {
+
+        uint256 streamId = tokenIdToStreamId[_tokenId];
+        require(streamId > 0, "Must have a stream");
+
+        Loan memory loan = tokensAvailableToLoan[_tokenId];
+        require(msg.sender == loan.lender, "Must be lender");
+
+        stream.cancelStream(streamId);
+//        safeTransferFrom(loan.borrower, loan.lender, _tokenId);
+
+        return paymentToken.transfer(loan.borrower, paymentToken.balanceOf(address(this)));
+    }
+
+
     function getRemainingTimeLeftForLoan(uint _tokenId) public returns (uint256) {
         uint256 streamId = tokenIdToStreamId[_tokenId];
         require(streamId > 0, "Must have a stream");
@@ -222,6 +237,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
         Loan memory loan = tokensAvailableToLoan[_tokenId];
         require(msg.sender == loan.lender, "Must be lender");
+
+        clawBackNft(_tokenId);
 
         return stream.withdrawFromStream(streamId, stream.balanceOf(streamId, loan.lender));
     }

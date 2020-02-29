@@ -25062,12 +25062,12 @@
         }
       },
       "links": {},
-      "address": "0xE36E2A7FCA0c8869eb4D11B711EE67789BDB6A17",
-      "transactionHash": "0x4d004693a0b7c68132df7506b200d0b465526c5c28e77b33c37a5cee7cefd79c"
+      "address": "0x341B85CAA58f4bC8ccEB3cBDa108d1B806083794",
+      "transactionHash": "0xb57bbf400cd7b09527eaee7afc4e6c16cae94bd05e9fed9238758cd860a42dd1"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T16:46:52.413Z",
+  "updatedAt": "2020-02-29T18:19:49.964Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

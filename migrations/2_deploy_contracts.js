@@ -33,11 +33,11 @@ module.exports = async function (deployer, network, accounts) {
     const borrower = accounts[0];
 
     // KO
-    await simpleNft.mintWithTokenURI(lender, 1, 'https://ipfs.infura.io/ipfs/QmV9QM5P5C3rPVMh8fL6FFnfzqqP5RvHDSZEiRdVZJPda3', {from: lender});
+    await simpleNft.mintWithTokenURI(lender, 1, 'https://ipfs.infura.io/ipfs/QmX4HaxFopmnyaxXLXwAUvFJqC5AyTnYiMqkZ2RWK2tt5S', {from: lender});
     // Kaiju
     await simpleNft.mintWithTokenURI(lender, 2, 'https://ipfs.infura.io/ipfs/QmP2cwq9muuTtzTKFuBN6xRRygVdfy2p124urPn1dQ8C9w', {from: lender});
     // Nifty
-    await simpleNft.mintWithTokenURI(lender, 3, 'https://niftyfootball.cards/api/network/1/token/1', {from: lender});
+    await simpleNft.mintWithTokenURI(lender, 3, 'https://niftyfootball.cards/api/network/1/token/2741', {from: lender});
 
     // Enable approval for all for the loan shark address
     await simpleNft.setApprovalForAll(loanShark.address, true);
@@ -54,7 +54,7 @@ module.exports = async function (deployer, network, accounts) {
     // Next three tokens are minted to but not put on loan so we can defo that flow
 
     // KO
-    await simpleNft.mintWithTokenURI(lender, 4, 'https://ipfs.infura.io/ipfs/QmdxMWDi6UiRBJPorWwSupRkebfmVggX554gfbULHomPvq', {from: lender});
+    await simpleNft.mintWithTokenURI(lender, 4, 'https://ipfs.infura.io/ipfs/QmUs7wJiN43pS13Dx82WTqPe8krRJfhfXgMCfNaD4RxWob', {from: lender});
     // BlockCities
     await simpleNft.mintWithTokenURI(lender, 5, 'https://us-central1-block-cities.cloudfunctions.net/api/network/1/token/2066', {from: lender});
     // Axie infinity
