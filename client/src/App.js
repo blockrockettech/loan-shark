@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 import Onboard from 'bnc-onboard'
 import Web3 from 'web3'
 import {
@@ -27,8 +27,28 @@ const styles = {
     fontWeight: 700,
     color: '#FFFFFF',
   },
+  content: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  title: {
+    fontWeight: 700,
+    // marginBottom: 20
+  },
+  list: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    margin: '20px 0',
+  },
   listItem: {
     margin: '10px 0',
+  },
+  intro: {
+    marginTop: 20,
+    fontSize: 48,
+    fontWeight: 500
   }
 }
 
@@ -86,16 +106,37 @@ class App extends Component {
           <Route exact path="/about">
             <div className={classes.app}>
               <Header />
-              Made at EthLondon 2020
+              Made at EthLondon 2020 by:
+              <ul >
+                <li className={classes.listItem}>Andy Gray and James Morgan, representing BlockRocket Tech</li>
+                <li className={classes.listItem}>Holly Atkinson</li>
+                <li className={classes.listItem}>Oliver Carding of CryptoKaiju</li>
+              </ul>
             </div>
           </Route>
           <Route exact path="/">
             <div className={classes.app}>
               <Header />
-              <ul>
-                <li className={classes.listItem}>Loan Shark enables you to borrow and loan NFTs</li>
-                <li className={classes.listItem}>ERC-721 compliant “wrapped NFT” which can be leased by owner via Sablier</li>
-              </ul>
+              
+              <div className={classes.content}>
+                <div className={classes.intro}>How does it work?</div>
+                <div className={classes.list}>
+                  <div className={classes.title}>Key features:</div>
+                  <ul >
+                    <li className={classes.listItem}>LoanShark blends NFTs with DeFi to enable temporary sharing of NFTs</li>
+                    <li className={classes.listItem}>Make money by leasing NFTs, while borrowing others you like!</li>
+                    <li className={classes.listItem}>Uses an ERC-721 compliant “wrapped NFT” contract which enables leasing via Sablier</li>
+                    <li className={classes.listItem}>LoanShark consumes any given NFT, proxying through all methods of the original NFT</li>
+                    <li className={classes.listItem}>And don't worry, the shark always has full ownership of their asset</li>
+                    <li className={classes.listItem}>Leverages OpenZeppelin token standards such as ERC-20 and EIP-721</li>
+                    <li className={classes.listItem}>Built on top Sabliers payment stream EIP-1620 and harnesses DAI as the payment token of choice</li>                  </ul>
+                </div>
+                <video controls width="750">
+                  <source src="/LoansharkexplainerAmended.mp4" />
+                  Sorry, your browser doesn't support embedded videos.
+                </video>
+                
+              </div>
             </div>
           </Route>
         </Switch>
