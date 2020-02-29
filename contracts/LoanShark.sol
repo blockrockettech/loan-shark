@@ -17,10 +17,6 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // state flags
         bool isEscrowed;
         bool isBorrowed;
-        //
-        //        // payment terms
-        //        uint256 costPerMinute;
-        //        uint256 maxMinutesAvailableForHire;
 
         uint256 start;
         uint256 end;
@@ -158,7 +154,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = address(0);
         loan.isBorrowed = false;
 
-        // TODO close stream .... ?
+        // TODO fix this?
+         stream.cancelStream(tokenIdToStreamId[_tokenId]);
+
+        delete tokenIdToStreamId[_tokenId];
 
         return true;
     }
@@ -182,7 +181,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         bool isEscrowed,
         bool isBorrowed,
         uint256 start,
-        uint256 end
+        uint256 end,
+        uint256 depositInWei
     ) {
         Loan memory loan = tokensAvailableToLoan[_tokenId];
         return (
@@ -191,7 +191,8 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.isEscrowed,
         loan.isBorrowed,
         loan.start,
-        loan.end
+        loan.end,
+        loan.depositInWei
         );
     }
 
