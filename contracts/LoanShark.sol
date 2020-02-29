@@ -17,13 +17,14 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         // state flags
         bool isEscrowed;
         bool isBorrowed;
-//
-//        // payment terms
-//        uint256 costPerMinute;
-//        uint256 maxMinutesAvailableForHire;
+        //
+        //        // payment terms
+        //        uint256 costPerMinute;
+        //        uint256 maxMinutesAvailableForHire;
 
         uint256 start;
         uint256 end;
+        uint256 depositInWei;
     }
 
     // What to stream the payment in
@@ -54,10 +55,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
 
-    function enableTokenForLending(uint256 _tokenId, uint256 _start, uint256 _end) public returns (bool) {
+    function enableTokenForLending(uint256 _tokenId, uint256 _start, uint256 _end, uint256 _depositInWei) public returns (bool) {
 
         // Validate input
-//        require(_costPerMinute > 0, "Cannot loan the token for free");
+        //        require(_costPerMinute > 0, "Cannot loan the token for free");
         require(tokensAvailableToLoan[_tokenId].tokenId == 0, "Token already placed for sale");
 
         // Validate caller owns it
@@ -73,7 +74,9 @@ contract LoanShark is ERC721Full, WhitelistedRole {
             isBorrowed : false,
 
             start : _start,
-            end : _end
+            end : _end,
+
+            depositInWei : _depositInWei
             });
 
         // Escrow NFT into the Loan Shark Contract
@@ -106,7 +109,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         return true;
     }
 
-    function borrowToken(uint256 _tokenId, uint256 _totalCommitmentInWei) public returns (bool) {
+    function borrowToken(uint256 _tokenId) public returns (bool) {
         require(tokensAvailableToLoan[_tokenId].tokenId != 0, "Token not for sale");
 
         Loan storage loan = tokensAvailableToLoan[_tokenId];
@@ -118,7 +121,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = msg.sender;
         loan.isBorrowed = true;
 
-        stream.createStream(loan.lender, _totalCommitmentInWei, address(paymentToken), loan.start, loan.end);
+        // TODO
+        // transfer token here in escrow to set up stream
+
+        stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
         return true;
     }
