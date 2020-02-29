@@ -168,13 +168,13 @@ class MyNFTs extends Component {
     return (
       <div className={classes.myNFTs}>
         <div className={classes.toggle}>
-          <span>NFTs For Loan</span>
+          <span>Borrow</span>
           <ToggleSwitch
             checked={this.state.showLendingToggle}
             onChange={this.handleChange}
             value="checked"
           />
-          <span>Other NFTs</span>
+          <span>Share</span>
         </div>
         <div className={classes.card}>
           {this.state.showLendingToggle?
