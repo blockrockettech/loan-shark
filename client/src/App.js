@@ -127,9 +127,9 @@ class App extends Component {
                     <li className={classes.listItem}>Make money by leasing NFTs, while borrowing others you like!</li>
                     <li className={classes.listItem}>Uses an ERC-721 compliant “wrapped NFT” contract which enables leasing via Sablier</li>
                     <li className={classes.listItem}>LoanShark consumes any given NFT, proxying through all methods of the original NFT</li>
-                    <li className={classes.listItem}>And don't worry, the shark always has full ownership of their asset</li>
+                    <li className={classes.listItem}>And don't worry, the shark always retains full ownership of their asset</li>
                     <li className={classes.listItem}>Leverages OpenZeppelin token standards such as ERC-20 and EIP-721</li>
-                    <li className={classes.listItem}>Built on top Sabliers payment stream EIP-1620 and harnesses DAI as the payment token of choice</li>                  </ul>
+                    <li className={classes.listItem}>Built on top Sablier's payment stream EIP-1620 and harnesses DAI as the payment token of choice</li>                  </ul>
                 </div>
                 <video controls width="750">
                   <source src="/LoansharkexplainerAmended.mp4" />
