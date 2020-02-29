@@ -24,7 +24,6 @@ const styles = {
     margin: '40px 0',
   },
   card: {
-    backgroundColor: '#648c8b',
     display: 'flex',
     justifyContent: 'center',
     borderRadius: 6,

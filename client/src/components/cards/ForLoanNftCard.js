@@ -11,47 +11,109 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = {
   root: {
-    maxWidth: 345,
-    maxHeight: 500,
+    width: 300,
+    height: 500,
     margin: 20,
-    minWidth: 256,
+    fontFamily: 'Spartan',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderRadius: 6,
+    backgroundColor: '#FFFFFF',
+    boxShadow: '3px 3px 5px 6px #ccc',
   },
-  media: {
-    height: 140,
+  textGroup: {
+
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: 600,
+    marginBottom: 20,
+  },
+  cardText: {
+    maxHeight: 230,
+    fontSize: 12,
+    overflow: 'scroll',
+    lineHeight: 1.25,
+  },
+  borrowButton: {
+    backgroundColor: '#5e6fe6',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 100,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#bca049',
+      color: '#000080'
+    }
+  },
+  clawbackButton: {
+    backgroundColor: '#b52114',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 100,
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#69120b',
+    }
+  },
+  imageContainer: {
+    minHeight: 100,
+    maxHeight: 469,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    maxWidth: 250,
+    maxHeight: 320,
+    marginTop: 10,
   },
 }
 
 const ForLoanNftCard = props =>  {
-  const { classes, item = {} } = props
+  const { classes, item = {}, borrowNFT, clawbackNFT } = props
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={item.image}
-          title={item.name}
-        />
+    <div className={classes.root}>
+      
+      <div className={classes.imageContainer}>
+        <img src={item.image} className={classes.image} />
+      </div>
+      <div className={classes.textGroup}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <div className={classes.cardTitle}>
             {item.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          </div>
+          <div className={classes.cardText}>
             {item.price}
             {item.duration}
             {item.description}
-          </Typography>
+          </div>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Borrow
-        </Button>
-        <Button size="small" color="primary">
-          Clawback
-        </Button>
-      </CardActions>
-    </Card>
+      
+        <CardActions>
+          <button className={classes.borrowButton} onClick={borrowNFT}>
+            Borrow
+          </button>
+          <button className={classes.clawbackButton} onClick={clawbackNFT}>
+            Clawback
+          </button>
+        </CardActions>
+      </div>
+    </div>
   )
 }
 
