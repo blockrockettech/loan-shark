@@ -55,13 +55,13 @@ module.exports = async function (deployer, network, accounts) {
 
     // Print out all tokens which have been put up for loan
     const totalTokens = await loanShark.totalTokens();
-    console.log('Total tokens', totalTokens);
+    // console.log('Total tokens', totalTokens);
 
     for (let i = 0; i < totalTokens; i++) {
         const tokenId = await loanShark.getTokenIdForIndex(i);
-        console.log('Token ID', tokenId, i);
+        // console.log('Token ID', tokenId, i);
         const loanDetails = await loanShark.getLoanDetails(tokenId);
-        console.log(loanDetails);
+        // console.log(loanDetails);
         const {tokenUri} = loanDetails;
         // make http call - load tokenUri
     }
