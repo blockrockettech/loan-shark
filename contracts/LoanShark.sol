@@ -9,7 +9,7 @@ import "./sablier/IERC1620.sol";
 contract LoanShark is ERC721Full, WhitelistedRole {
 
     struct Loan {
-        // Config
+        // config
         address lender;
         uint256 tokenId;
         address borrower;
@@ -18,8 +18,11 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         bool isEscrowed;
         bool isBorrowed;
 
+        // window
         uint256 start;
         uint256 end;
+
+        uint256 periodInSecs;
         uint256 depositInWei;
     }
 
@@ -46,7 +49,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         IERC721Full _tokenContract, // How to make this generic to not accept a token at construction
         IERC20 _paymentToken, // DAI ... or even zkDAI ?
         IERC1620 _stream
-    ) ERC721Full("LoanShark", "LSK🦈") public {
+    ) ERC721Full("LoanShark", "SHARK🦈") public {
         super.addWhitelisted(msg.sender);
 
         paymentToken = _paymentToken;
@@ -58,11 +61,12 @@ contract LoanShark is ERC721Full, WhitelistedRole {
     }
 
     // TODO create a proxy method to allow call on original NFT by bytecode/method args - dynamic lookup?
-
-    function enableTokenForLending(uint256 _tokenId, uint256 _start, uint256 _end, uint256 _depositInWei) public returns (bool) {
+    function enableTokenForLending(uint256 _tokenId, uint256 _periodInSecs, uint256 _depositInWei) public returns (bool) {
 
         // Validate input
-        //        require(_costPerMinute > 0, "Cannot loan the token for free");
+        require(_depositInWei > 0, "Must have a deposit");
+        require(_periodInSecs > 0, "Must have a period in secs");
+
         require(tokensAvailableToLoan[_tokenId].tokenId == 0, "Token already placed for sale");
 
         // Validate caller owns it
@@ -77,9 +81,10 @@ contract LoanShark is ERC721Full, WhitelistedRole {
             isEscrowed : true,
             isBorrowed : false,
 
-            start : _start,
-            end : _end,
+            start : 0,
+            end : 0,
 
+            periodInSecs: _periodInSecs,
             depositInWei : _depositInWei
             });
 
@@ -132,13 +137,14 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = msg.sender;
         loan.isBorrowed = true;
 
+        loan.start = now.add(60);
+        loan.end = loan.start.add(loan.periodInSecs);
+
         // deposit here in escrow to set up stream
         paymentToken.transferFrom(msg.sender, address(this), loan.depositInWei);
 
-        // FIXME we need to capture length and work this out or pass in when we call the borrow method
         // this will pull the escrowed amount into the stream
-        // uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
-        uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), now + 60, now + 2592000 + 60);
+        uint256 streamId = stream.createStream(loan.lender, loan.depositInWei, address(paymentToken), loan.start, loan.end);
 
         tokenIdToStreamId[_tokenId] = streamId;
         return true;
@@ -156,7 +162,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         loan.borrower = address(0);
         loan.isBorrowed = false;
 
-         stream.cancelStream(tokenIdToStreamId[_tokenId]);
+        stream.cancelStream(tokenIdToStreamId[_tokenId]);
 
         delete tokenIdToStreamId[_tokenId];
 
@@ -206,7 +212,7 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         require(msg.sender == loan.lender, "Must be lender");
 
         stream.cancelStream(streamId);
-//        safeTransferFrom(loan.borrower, loan.lender, _tokenId);
+        //        safeTransferFrom(loan.borrower, loan.lender, _tokenId);
 
         return paymentToken.transfer(loan.borrower, paymentToken.balanceOf(address(this)));
     }
