@@ -431,14 +431,14 @@
     "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Full.sol",
     "exportedSymbols": {
       "IERC721Full": [
-        5706
+        5781
       ]
     },
-    "id": 5707,
+    "id": 5782,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5696,
+        "id": 5771,
         "literals": [
           "solidity",
           "^",
@@ -451,10 +451,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "file": "./IERC721.sol",
-        "id": 5697,
+        "id": 5772,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5668,
+        "scope": 5782,
+        "sourceUnit": 5743,
         "src": "25:23:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -462,10 +462,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol",
         "file": "./IERC721Enumerable.sol",
-        "id": 5698,
+        "id": 5773,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5695,
+        "scope": 5782,
+        "sourceUnit": 5770,
         "src": "49:33:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -473,10 +473,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
         "file": "./IERC721Metadata.sol",
-        "id": 5699,
+        "id": 5774,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5730,
+        "scope": 5782,
+        "sourceUnit": 5805,
         "src": "83:31:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -487,17 +487,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5700,
+              "id": 5775,
               "name": "IERC721",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5667,
+              "referencedDeclaration": 5742,
               "src": "276:7:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721_$5667",
+                "typeIdentifier": "t_contract$_IERC721_$5742",
                 "typeString": "contract IERC721"
               }
             },
-            "id": 5701,
+            "id": 5776,
             "nodeType": "InheritanceSpecifier",
             "src": "276:7:31"
           },
@@ -505,17 +505,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5702,
+              "id": 5777,
               "name": "IERC721Enumerable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5694,
+              "referencedDeclaration": 5769,
               "src": "285:17:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721Enumerable_$5694",
+                "typeIdentifier": "t_contract$_IERC721Enumerable_$5769",
                 "typeString": "contract IERC721Enumerable"
               }
             },
-            "id": 5703,
+            "id": 5778,
             "nodeType": "InheritanceSpecifier",
             "src": "285:17:31"
           },
@@ -523,42 +523,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5704,
+              "id": 5779,
               "name": "IERC721Metadata",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5729,
+              "referencedDeclaration": 5804,
               "src": "304:15:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721Metadata_$5729",
+                "typeIdentifier": "t_contract$_IERC721Metadata_$5804",
                 "typeString": "contract IERC721Metadata"
               }
             },
-            "id": 5705,
+            "id": 5780,
             "nodeType": "InheritanceSpecifier",
             "src": "304:15:31"
           }
         ],
         "contractDependencies": [
-          3394,
-          5667,
-          5694,
-          5729
+          3469,
+          5742,
+          5769,
+          5804
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, full implementation interface\n@dev See https://eips.ethereum.org/EIPS/eip-721",
         "fullyImplemented": false,
-        "id": 5706,
+        "id": 5781,
         "linearizedBaseContracts": [
-          5706,
-          5729,
-          5694,
-          5667,
-          3394
+          5781,
+          5804,
+          5769,
+          5742,
+          3469
         ],
         "name": "IERC721Full",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 5707,
+        "scope": 5782,
         "src": "252:124:31"
       }
     ],
@@ -568,14 +568,14 @@
     "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Full.sol",
     "exportedSymbols": {
       "IERC721Full": [
-        5706
+        5781
       ]
     },
-    "id": 5707,
+    "id": 5782,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5696,
+        "id": 5771,
         "literals": [
           "solidity",
           "^",
@@ -588,10 +588,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "file": "./IERC721.sol",
-        "id": 5697,
+        "id": 5772,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5668,
+        "scope": 5782,
+        "sourceUnit": 5743,
         "src": "25:23:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -599,10 +599,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol",
         "file": "./IERC721Enumerable.sol",
-        "id": 5698,
+        "id": 5773,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5695,
+        "scope": 5782,
+        "sourceUnit": 5770,
         "src": "49:33:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -610,10 +610,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
         "file": "./IERC721Metadata.sol",
-        "id": 5699,
+        "id": 5774,
         "nodeType": "ImportDirective",
-        "scope": 5707,
-        "sourceUnit": 5730,
+        "scope": 5782,
+        "sourceUnit": 5805,
         "src": "83:31:31",
         "symbolAliases": [],
         "unitAlias": ""
@@ -624,17 +624,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5700,
+              "id": 5775,
               "name": "IERC721",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5667,
+              "referencedDeclaration": 5742,
               "src": "276:7:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721_$5667",
+                "typeIdentifier": "t_contract$_IERC721_$5742",
                 "typeString": "contract IERC721"
               }
             },
-            "id": 5701,
+            "id": 5776,
             "nodeType": "InheritanceSpecifier",
             "src": "276:7:31"
           },
@@ -642,17 +642,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5702,
+              "id": 5777,
               "name": "IERC721Enumerable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5694,
+              "referencedDeclaration": 5769,
               "src": "285:17:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721Enumerable_$5694",
+                "typeIdentifier": "t_contract$_IERC721Enumerable_$5769",
                 "typeString": "contract IERC721Enumerable"
               }
             },
-            "id": 5703,
+            "id": 5778,
             "nodeType": "InheritanceSpecifier",
             "src": "285:17:31"
           },
@@ -660,42 +660,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 5704,
+              "id": 5779,
               "name": "IERC721Metadata",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5729,
+              "referencedDeclaration": 5804,
               "src": "304:15:31",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IERC721Metadata_$5729",
+                "typeIdentifier": "t_contract$_IERC721Metadata_$5804",
                 "typeString": "contract IERC721Metadata"
               }
             },
-            "id": 5705,
+            "id": 5780,
             "nodeType": "InheritanceSpecifier",
             "src": "304:15:31"
           }
         ],
         "contractDependencies": [
-          3394,
-          5667,
-          5694,
-          5729
+          3469,
+          5742,
+          5769,
+          5804
         ],
         "contractKind": "contract",
         "documentation": "@title ERC-721 Non-Fungible Token Standard, full implementation interface\n@dev See https://eips.ethereum.org/EIPS/eip-721",
         "fullyImplemented": false,
-        "id": 5706,
+        "id": 5781,
         "linearizedBaseContracts": [
-          5706,
-          5729,
-          5694,
-          5667,
-          3394
+          5781,
+          5804,
+          5769,
+          5742,
+          3469
         ],
         "name": "IERC721Full",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 5707,
+        "scope": 5782,
         "src": "252:124:31"
       }
     ],
@@ -707,7 +707,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-02-29T16:46:27.029Z",
+  "updatedAt": "2020-02-29T20:30:38.023Z",
   "devdoc": {
     "details": "See https://eips.ethereum.org/EIPS/eip-721",
     "methods": {

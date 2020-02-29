@@ -113,7 +113,12 @@ const toDai = (value) => {
 }
 
 const LoandNft = props =>  {
-  const { classes, item = {}, balance = 0, } = props
+  const {
+    classes,
+    item = {},
+    balance = 0,
+    onReturnAssetClicked = (item) => {},
+  } = props
 
   return (
     <div className={classes.root}>
@@ -138,7 +143,7 @@ const LoandNft = props =>  {
           </div>
         </CardContent>
         <CardActions>
-          <Button className={classes.returnAssetButton}>
+          <Button className={classes.returnAssetButton}  onClick={() => onReturnAssetClicked(item)}>
             Return Asset
           </Button>
         </CardActions>

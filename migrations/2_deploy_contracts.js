@@ -12,7 +12,7 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(MockDAI);
     const mockDAI = await MockDAI.deployed();
 
-    const lotsOfCash = "1000000000000000000000000";
+    const lotsOfCash = "10000000000000000000000000"; // lots of dollar!
     const deposit =    "2999999999999998944000"; // almost 3,000, but not quite
 
     // Give the first 3 accounts 10k in fake DAI
@@ -74,12 +74,8 @@ module.exports = async function (deployer, network, accounts) {
     //     // make http call - load tokenUri
     // }
 
-    // await loanShark.borrowToken(1, {from: borrower});
-    // await mockDAI.approve(loanShark.address, this.deposit, {from: bob});
-
     // set up one borrow
     mockDAI.approve(loanShark.address, lotsOfCash, {from: borrower});
 
     await loanShark.borrowToken(1, {from: borrower});
-
 };

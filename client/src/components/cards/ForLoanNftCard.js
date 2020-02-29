@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Web3 from 'web3';
 
 const styles = {
   root: {
@@ -67,6 +68,10 @@ const styles = {
   },
 }
 
+const toDai = (value) => {
+  return `$${parseFloat(Web3.utils.fromWei(value, 'ether')).toFixed(2)}`;
+}
+
 const ForLoanNftCard = props =>  {
   const {
     classes,
@@ -87,9 +92,8 @@ const ForLoanNftCard = props =>  {
             {item.name}
           </div>
           <div className={classes.cardText}>
-            {item.price}
-            {item.duration}
             {item.description}
+            <br />{toDai(item.depositInWei)}
           </div>
         </CardContent>
 

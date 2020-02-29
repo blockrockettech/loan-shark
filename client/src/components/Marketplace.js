@@ -29,7 +29,7 @@ const onboard = Onboard({
 class Marketplace extends Component {
   state = {
     web3: null,
-    accounts: null,
+    account: null,
     contract: null,
     nftsForSale: [],
   }
@@ -38,6 +38,7 @@ class Marketplace extends Component {
 
   componentDidMount = async () => {
     try {
+      const account = (await web3.eth.getAccounts())[0]
       const networkId = await web3.eth.net.getId()
       const deployedNetwork = LoanShark.networks[networkId]
       const instance = new web3.eth.Contract(
@@ -45,7 +46,7 @@ class Marketplace extends Component {
           deployedNetwork && deployedNetwork.address,
       )
 
-      this.setState({ web3, contract: instance })
+      this.setState({ web3, contract: instance, account })
 
       this.getNFTsForSale()
       this.timer = setInterval(() =>{
@@ -78,17 +79,23 @@ class Marketplace extends Component {
           ...data,
           ...loanDetails,
           balance,
+          tokenId
         };
         nftsForSale.push(nft)
       }
       console.log("Loaded for sale NFTs", nftsForSale)
     }
     this.setState({ nftsForSale })
-    // this.props.addTokensWithDispatch(nftsForSale)
+  }
+
+  onReturnAssetClick = async (item) => {
+    console.log("onReturnAssetClick", item)
+    const { contract, account } = this.state
+    await contract.methods.returnBorrowedNft(item.tokenId).send({from: account})
   }
 
   showMediaCards = () => {
-    return this.state.nftsForSale.map(item => <LoandNft key={item.name} item={item}/>)
+    return this.state.nftsForSale.map(item => <LoandNft key={item.name} item={item} onReturnAssetClicked={this.onReturnAssetClick}/>)
   }
 
   render() {
