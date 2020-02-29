@@ -12,12 +12,13 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(MockDAI);
     const mockDAI = await MockDAI.deployed();
 
-    const deposit = "2999999999999998944000"; // almost 3,000, but not quite
+    const lotsOfCash = "1000000000000000000000000";
+    const deposit =    "2999999999999998944000"; // almost 3,000, but not quite
 
     // Give the first 3 accounts 10k in fake DAI
-    await mockDAI.mint(accounts[0], deposit);
-    await mockDAI.mint(accounts[1], deposit);
-    await mockDAI.mint(accounts[2], deposit);
+    await mockDAI.mint(accounts[0], lotsOfCash);
+    await mockDAI.mint(accounts[1], lotsOfCash);
+    await mockDAI.mint(accounts[2], lotsOfCash);
 
     // Deploy Sablier
     await deployer.deploy(Sablier);
@@ -42,8 +43,8 @@ module.exports = async function (deployer, network, accounts) {
     await simpleNft.setApprovalForAll(loanShark.address, true);
 
     const now = Math.round(new Date().getTime() / 1000); // get seconds since unix epoch
-    const startTime = now + 3600; // 1 hour from now
-    const stopTime = now + 2592000 + 3600; // 30 days and 1 hour from now
+    const startTime = now + 60; // 1 min from now
+    const stopTime = now + 2592000 + 60; // 30 days and 1 min from now
 
     // first three tokens are put for loan
     await loanShark.enableTokenForLending(1, startTime, stopTime, deposit, {from: lender});
@@ -77,7 +78,7 @@ module.exports = async function (deployer, network, accounts) {
     // await mockDAI.approve(loanShark.address, this.deposit, {from: bob});
 
     // set up one borrow
-    mockDAI.approve(loanShark.address, deposit, {from: borrower});
+    mockDAI.approve(loanShark.address, lotsOfCash, {from: borrower});
 
     await loanShark.borrowToken(1, {from: borrower});
 

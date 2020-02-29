@@ -212,7 +212,6 @@ contract LoanShark is ERC721Full, WhitelistedRole {
         require(streamId > 0, "Must have a stream");
 
         Loan memory loan = tokensAvailableToLoan[_tokenId];
-        require(msg.sender == loan.lender, "Must be lender");
 
         return stream.balanceOf(streamId, loan.lender);
     }

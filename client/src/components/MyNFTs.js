@@ -140,12 +140,26 @@ class MyNFTs extends Component {
     })
   }
 
+  onBorrowClick = async (item) => {
+    console.log("onBorrowClick", item)
+    const { loanSharkContract, account } = this.state
+    await loanSharkContract.methods.borrowToken(item.tokenId).send({from: account})
+  }
+
+  onClawbackClick = async (item) => {
+    console.log("onClawbackClick", item)
+    const { loanSharkContract, account } = this.state
+    await loanSharkContract.methods.clawBackNft(item.tokenId).send({from: account})
+  }
+
   buildMyNftCards = () => {
     return this.state.myNfts.map(item => <NftCard key={item.tokenId} item={item} />)
   }
 
   buildCardsForSale = () => {
-    return this.state.nftsForSale.map(item => <ForLoanNftCard key={item.tokenId} item={item} />)
+    return this.state.nftsForSale.map(item => <ForLoanNftCard key={item.tokenId} item={item}
+                                                              onBorrowClicked={this.onBorrowClick}
+                                                              onClawbackClicked={this.onClawbackClick} />)
   }
 
   render() {
@@ -163,9 +177,9 @@ class MyNFTs extends Component {
           <span>Other NFTs</span>
         </div>
         <div className={classes.card}>
-          {this.state.showLendingToggle? 
+          {this.state.showLendingToggle?
               this.buildMyNftCards()
-            : 
+            :
               this.buildCardsForSale()
           }
         </div>
