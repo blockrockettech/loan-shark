@@ -3,7 +3,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Switch from '@material-ui/core/Switch'
 import Web3 from 'web3'
 import Onboard from 'bnc-onboard';
+
 const SimpleNft = require('../contracts/SimpleNft.json')
+const LoanShark = require('../contracts/LoanShark.json')
+
 const axios = require('axios')
 
 const styles = {
@@ -45,7 +48,8 @@ const ToggleSwitch = withStyles({
 
 let web3
 
-const onboard = Onboard({
+const onboard
+    = Onboard({
   dappId: '09a2db78-5c6a-4dad-b5f7-218b278d0e55', // [String] The API key created by step one above
   networkId: 5777, // [Integer] The Ethereum network ID your Dapp uses.
   subscriptions: {
@@ -60,18 +64,22 @@ class MyNFTs extends Component {
     web3: null,
     account: null,
     simpleNftContract: null,
+    loanSharkContract: null,
   }
 
   componentDidMount = async () => {
     try {
       const account = (await web3.eth.getAccounts())[0]
       const networkId = await web3.eth.net.getId()
-      const deployedNetwork = SimpleNft.networks[networkId]
       const simpleNftContract = new web3.eth.Contract(
           SimpleNft.abi,
-          deployedNetwork && deployedNetwork.address,
+          SimpleNft.networks[networkId].address,
       )
-      this.setState({ web3, simpleNftContract, account })
+      const loanSharkContract = new web3.eth.Contract(
+          LoanShark.abi,
+          LoanShark.networks[networkId].address,
+      )
+      this.setState({ web3, simpleNftContract, loanSharkContract, account })
       this.getMyNfts()
     } catch (error) {
       alert(
@@ -82,7 +90,7 @@ class MyNFTs extends Component {
   }
 
   getMyNfts = async() => {
-    const { simpleNftContract, account } = this.state
+    const { simpleNftContract, loanSharkContract, account } = this.state
     const tokensOfOwner = await simpleNftContract.methods.tokensOfOwner(account).call()
     console.log("tokensOfOwner", tokensOfOwner);
 
@@ -96,12 +104,26 @@ class MyNFTs extends Component {
       };
     }))
 
-    console.log("myNfts", myNfts);
+    const tokenIds = await loanSharkContract.methods.getTokensLenderIsBorrowing(account).call()
+
+    const nftsForSale = await Promise.all(tokenIds.map(async (tokenId) => {
+      const loanDetails = await loanSharkContract.methods.getLoanDetails(tokenId).call()
+      const tokenUri = await simpleNftContract.methods.tokenURI(tokenId).call()
+      const { data } = await axios.get(tokenUri)
+      return {
+        ...data,
+        ...loanDetails
+      }
+    }))
+
+    console.log("NFTS I own", myNfts);
+    console.log("NFTS I've put up for borrowing", nftsForSale);
 
     this.setState({
       ...this.state,
       tokensOfOwner,
-      myNfts
+      myNfts,
+      nftsForSale
     })
   }
 
