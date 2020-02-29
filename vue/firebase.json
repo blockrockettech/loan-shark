@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/build/**",
+      "**/contracts/**",
+      "**/contracts-flat/**",
+      "**/migrations/**",
+      ".idea/**",
+      "**/svg_tests/**",
+      "**/test/**",
+      "mnemonic.js"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
