@@ -55,16 +55,33 @@ const styles = {
       color: '#000080'
     }
   },
+  disabledButton: {
+    backgroundColor: '#ffffff',
+    fontSize: 12,
+    fontWeight: 600,
+    textDecoration: 'none',
+    outline: 'none',
+    borderRadius: 3,
+    height: 34,
+    width: 280,
+    color: '#000000',
+    cursor: 'default',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid #000000'
+  },
   imageContainer: {
     minHeight: 100,
     maxHeight: 469,
+    height: 340,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
     maxWidth: 250,
-    maxHeight: 320,
+    maxHeight: 310,
     marginTop: 10,
   },
 }
@@ -120,7 +137,7 @@ const ForLoanNftCard = props =>  {
             Borrow
           </button>
               :
-              <div>
+              <div className={classes.disabledButton}>
                 On loan: {shortAddress(item.borrower)}
               </div>
           }
