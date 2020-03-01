@@ -108,9 +108,9 @@ const ForLoanNftCard = props =>  {
           <div className={classes.cardText}>
             {/*Cost: {toDai(item.depositInWei)}*/}
             {/*<br />*/}
-            <p>Length: {diffInDays(item.start, item.end)}</p>
-            <p>Cost per day: {toDai(costPerDay(item.start, item.end, item.depositInWei))}</p>
-            Lender: {shortAddress(item.lender)}
+            <p>⏳ Length: <strong>{diffInDays(item.start, item.end)}</strong></p>
+            <p>💸 Cost per day: <strong>{toDai(costPerDay(item.start, item.end, item.depositInWei))}</strong></p>
+            👤 Lender: {shortAddress(item.lender)}
           </div>
         </CardContent>
 

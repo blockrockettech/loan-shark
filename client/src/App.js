@@ -108,21 +108,21 @@ class App extends Component {
               <Header />
               Made at EthLondon 2020 by:
               <ul >
-                <li className={classes.listItem}>Andy Gray and James Morgan, representing BlockRocket Tech</li>
+                <li className={classes.listItem}>Andy Gray & James Morgan ofr <a href="http://blockrocket.tech" target="_blank">BlockRocket</a></li>
                 <li className={classes.listItem}>Holly Atkinson</li>
-                <li className={classes.listItem}>Oliver Carding of CryptoKaiju</li>
+                <li className={classes.listItem}>Oliver Carding of <a href="https://cryptokaiju.io" target="_blank">CryptoKaiju</a></li>
               </ul>
             </div>
           </Route>
           <Route exact path="/">
             <div className={classes.app}>
               <Header />
-              
+
               <div className={classes.content}>
                 <div className={classes.intro}>How does it work?</div>
                 <div className={classes.list}>
                   <div className={classes.title}>Key features:</div>
-                  <ul >
+                    <ul >
                     <li className={classes.listItem}>LoanShark blends NFTs with DeFi to enable temporary sharing of NFTs</li>
                     <li className={classes.listItem}>Make money by leasing NFTs, while borrowing others you like!</li>
                     <li className={classes.listItem}>Uses an ERC-721 compliant “wrapped NFT” contract which enables leasing via Sablier</li>
@@ -135,7 +135,7 @@ class App extends Component {
                   <source src="/LoansharkexplainerAmended.mp4" />
                   Sorry, your browser doesn't support embedded videos.
                 </video>
-                
+
               </div>
             </div>
           </Route>
