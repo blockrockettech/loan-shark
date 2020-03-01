@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Web3 from 'web3';
+import moment from 'moment';
 
 const styles = {
   root: {
@@ -29,7 +30,7 @@ const styles = {
   cardTitle: {
     fontSize: 24,
     fontWeight: 600,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   cardText: {
     maxHeight: 230,
@@ -69,7 +70,20 @@ const styles = {
 }
 
 const toDai = (value) => {
-  return `$${parseFloat(Web3.utils.fromWei(value, 'ether')).toFixed(2)}`;
+  return `$${parseFloat(Web3.utils.fromWei(value.toString(), 'ether')).toFixed(2)}`;
+}
+
+const diffInDays = (start, end) => {
+  return `${moment.duration(moment.unix(end).diff(moment.unix(start))).asDays()} days`
+}
+
+const costPerDay = (start, end, depositInWei) => {
+  let days = moment.duration(moment.unix(end).diff(moment.unix(start))).asDays();
+  return depositInWei / days;
+}
+
+const shortAddress = (address) => {
+  return `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`
 }
 
 const ForLoanNftCard = props =>  {
@@ -92,15 +106,24 @@ const ForLoanNftCard = props =>  {
             {item.name}
           </div>
           <div className={classes.cardText}>
-            {item.description}
-            <br />{toDai(item.depositInWei)}
+            {/*Cost: {toDai(item.depositInWei)}*/}
+            {/*<br />*/}
+            <p>Length: {diffInDays(item.start, item.end)}</p>
+            <p>Cost per day: {toDai(costPerDay(item.start, item.end, item.depositInWei))}</p>
+            Lender: {shortAddress(item.lender)}
           </div>
         </CardContent>
 
         <CardActions>
+          {!item.isBorrowed ?
           <button className={classes.borrowButton} onClick={() => onBorrowClicked(item)}>
             Borrow
           </button>
+              :
+              <div>
+                On loan: {shortAddress(item.borrower)}
+              </div>
+          }
         </CardActions>
       </div>
     </div>
