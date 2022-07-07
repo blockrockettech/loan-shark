@@ -20,6 +20,6 @@
     "@openzeppelin/contracts": "^2.5.0",
     "@openzeppelin/test-helpers": "^0.5.4",
     "chai": "^4.2.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   }
 }
