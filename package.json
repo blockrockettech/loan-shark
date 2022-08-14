@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/blockrockettech/loan-shark#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^2.5.0",
+    "@openzeppelin/contracts": "^4.7.2",
     "@openzeppelin/test-helpers": "^0.5.4",
     "chai": "^4.2.0",
     "moment": "^2.24.0"
